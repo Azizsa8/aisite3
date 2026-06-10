@@ -1,0 +1,6 @@
+{
+  "name": "أيسرز | حلول تشغيل وأتمتة الأعمال",
+  "description": "ننفذ حلول تشغيل وأتمتة للأعمال بشكل سريع وعملي، من صفحات الهبوط وإدارة العملاء والتحليلات إلى أتمتة سير العمل والاستضافة الذاتية للبيانات.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
