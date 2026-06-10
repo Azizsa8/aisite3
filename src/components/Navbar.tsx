@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Cpu, Menu, X, ArrowUpLeft, MessageCircle } from "lucide-react";
+import logo2 from "../assets/logo2.png";
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -97,18 +98,9 @@ export default function Navbar({ onNavigate, activeSection, lang, onLangToggle }
           
           {/* Logo & Brand */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleNavClick("hero")} id="brand-logo-container">
-            {/* Swaid Monumental Monogram Logo SVG */}
-            <div className="bg-white p-1.5 rounded-xl flex items-center justify-center shadow-sm border border-slate-200 transition-transform hover:scale-105" id="navbar-logo-badge">
-              <svg viewBox="0 0 100 100" className="w-8 h-8 text-slate-900 fill-current" xmlns="http://www.w3.org/2000/svg">
-                {/* Left Slanted Pillar with a sharp dynamic V-notch at the bottom */}
-                <path d="M 0 0 H 24 L 59 70 L 47 94 L 35 70 L 0 0 Z" />
-                {/* Inner V connection */}
-                <path d="M 35 70 L 47 94 L 59 70 L 47 50 L 35 70 Z" />
-                {/* Right Slanted Pillar (Parallel) */}
-                <path d="M 44 0 H 68 L 100 64 H 76 Z" />
-                {/* Circle at top right */}
-                <circle cx="88" cy="12" r="12" />
-              </svg>
+            {/* Swaid Monumental Monogram Logo SVG replaced with Logo2 */}
+            <div className="bg-white p-1 rounded-xl flex items-center justify-center shadow-sm border border-slate-200 transition-transform hover:scale-105" id="navbar-logo-badge">
+              <img src={logo2} alt="AISERS WEB Logo" className="w-9 h-9 object-contain" />
             </div>
             <div className={`flex flex-col ${isRtl ? "text-right" : "text-left"}`}>
               <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 font-sans" id="brand-name">
