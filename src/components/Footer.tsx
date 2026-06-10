@@ -6,6 +6,7 @@
 import React from "react";
 import { Cpu, Heart, Shield, Lock, CheckCircle } from "lucide-react";
 import sawaedLogo from "../assets/sawaed-logo.png";
+import logo2 from "../assets/logo2.png";
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -41,18 +42,9 @@ export default function Footer({ onNavigate, lang }: FooterProps) {
           {/* Logo Column (6 columns) */}
           <div className="md:col-span-6 space-y-5" id="footer-brand-column">
             <div className={`flex items-center gap-3 cursor-pointer ${isRtl ? "" : "flex-row-reverse justify-end"}`} onClick={() => handleFootClick("hero")} id="footer-logo">
-              {/* Swaid Monumental Monogram Logo SVG */}
-              <div className="bg-white/5 p-2 rounded-2xl flex items-center justify-center border border-white/10 shrink-0 shadow-lg relative group transition-all hover:bg-white/10">
-                <svg viewBox="0 0 100 100" className="w-10 h-10 text-white fill-current" xmlns="http://www.w3.org/2000/svg">
-                  {/* Left Slanted Pillar with a sharp dynamic V-notch at the bottom */}
-                  <path d="M 0 0 H 24 L 59 70 L 47 94 L 35 70 L 0 0 Z" />
-                  {/* Inner V connection */}
-                  <path d="M 35 70 L 47 94 L 59 70 L 47 50 L 35 70 Z" />
-                  {/* Right Slanted Pillar (Parallel) */}
-                  <path d="M 44 0 H 68 L 100 64 H 76 Z" />
-                  {/* Circle at top right */}
-                  <circle cx="88" cy="12" r="12" />
-                </svg>
+              {/* Swaid Monumental Monogram Logo SVG replaced with Logo2 */}
+              <div className="bg-white/5 p-1 rounded-2xl flex items-center justify-center border border-white/10 shrink-0 shadow-lg relative group transition-all hover:bg-white/10">
+                <img src={logo2} alt="AISERS WEB Logo" className="w-10 h-10 object-contain invert" />
               </div>
 
               <div className={`flex flex-col ${isRtl ? "items-start" : "items-end"}`}>
