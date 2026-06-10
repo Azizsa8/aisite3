@@ -11,7 +11,6 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import InteractiveDemo from "./components/InteractiveDemo";
 import AuditTool from "./components/AuditTool";
-import CostAndSelfHostingCalculator from "./components/CostAndSelfHostingCalculator";
 import HowWeWork from "./components/HowWeWork";
 import CaseStudies from "./components/CaseStudies";
 import ContactForm from "./components/ContactForm";
@@ -22,7 +21,6 @@ const progressSections = [
   { id: "services", ar: "ماذا ننفذ", en: "Services" },
   { id: "interactive-demo", ar: "تجربة حيّة", en: "Live Demo" },
   { id: "audit-tool", ar: "تقييم الهدر", en: "Leakage Audit" },
-  { id: "calculator", ar: "حاسبة التكاليف", en: "SaaS Calculator" },
   { id: "methodology", ar: "طريقة العمل", en: "Methodology" },
   { id: "cases", ar: "حالات الاستخدام", en: "Case Studies" },
   { id: "contact", ar: "اتصل بنا", en: "Contact Us" }
@@ -60,10 +58,6 @@ export default function App() {
           title: "أداة تقييم الهدر التشغيلي والتقني المباشر - أيسرز ويب",
           desc: "ابدأ فحص الأخطاء اليدوية وهدر ميزانيتك الآن. احصل على تقرير تشخيصي فوري يوضح أماكن تسريب البيانات والموارد في شركتك وكيفية إصلاحها."
         },
-        calculator: {
-          title: "حاسبة توفير تكاليف الاستضافة وبرمجيات SaaS - أيسرز ويب",
-          desc: "احسب نسبة التوفير الحقيقية عند الانتقال من برمجيات الاشتراك الشهري التقليدية إلى حلول الاستضافة الذاتية (Self-hosting) مع سيادة كاملة لبياناتك."
-        },
         methodology: {
           title: "منهجية العمل والتحول الرقمي - أيسرز ويب",
           desc: "كيف ننجز مشروعك خلال 3 إلى 7 أيام؟ تعرف على خارطة الطريق الهادئة من التحليل والتصميم للأتمتة الفعالة وبدء العمل الفوري."
@@ -93,10 +87,6 @@ export default function App() {
         "audit-tool": {
           title: "Operational Tech-Leakage Test & Audit Tool - Aisers Web",
           desc: "Take our rapid operational audit. Instantly assess your company's risk points, redundant manual steps, and score data leakages with actionable remedies."
-        },
-        calculator: {
-          title: "SaaS vs Private Self-hosted Cloud Savings Calculator - Aisers Web",
-          desc: "Calculate your accurate cost projection savings when moving from trapped monthly license fees to secure, dedicated, self-hosted deployment architecture."
         },
         methodology: {
           title: "How We Deliver Operational Excellence - Aisers Web",
@@ -179,7 +169,6 @@ export default function App() {
       "services",
       "interactive-demo",
       "audit-tool",
-      "calculator",
       "methodology",
       "cases",
       "contact"
@@ -297,20 +286,7 @@ export default function App() {
           </motion.div>
         </motion.div>
 
-        {/* Section 5: SaaS vs Private Self-hosting Savings Calculator */}
-        <motion.div 
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.12 }}
-          variants={sectionContainerVariants}
-          className="w-full"
-        >
-          <motion.div variants={sectionItemVariants}>
-            <CostAndSelfHostingCalculator lang={lang} />
-          </motion.div>
-        </motion.div>
-
-        {/* Section 6: Methodology timeline */}
+        {/* Section 5: Methodology timeline */}
         <motion.div 
           initial="hidden"
           whileInView="show"

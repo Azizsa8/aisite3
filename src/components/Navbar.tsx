@@ -46,7 +46,6 @@ export default function Navbar({ onNavigate, activeSection, lang, onLangToggle }
     { id: "services", label: "ماذا ننفذ" },
     { id: "interactive-demo", label: "تجربة حيّة" },
     { id: "audit-tool", label: "تقييم الهدر" },
-    { id: "calculator", label: "حاسبة التكاليف" },
     { id: "methodology", label: "طريقة العمل" },
     { id: "cases", label: "حالات الاستخدام" }
   ] : [
@@ -54,7 +53,6 @@ export default function Navbar({ onNavigate, activeSection, lang, onLangToggle }
     { id: "services", label: "Services" },
     { id: "interactive-demo", label: "Live Demo" },
     { id: "audit-tool", label: "Leakage Audit" },
-    { id: "calculator", label: "SaaS Calculator" },
     { id: "methodology", label: "Methodology" },
     { id: "cases", label: "Case Studies" }
   ];
