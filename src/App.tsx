@@ -337,7 +337,7 @@ export default function App() {
       {/* Floating Side Progress Indicator Dots */}
       <div 
         id="side-progress-dots" 
-        className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3 py-4 px-1.5 bg-white/80 border border-slate-200/60 backdrop-blur-md rounded-full shadow-lg items-center"
+        className="fixed right-2 lg:right-3 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3 py-4 px-2 bg-white/90 border border-slate-200/60 backdrop-blur-md rounded-full shadow-lg items-center transition-all duration-300 opacity-0 hover:opacity-100"
         aria-label="Section navigation tracker"
       >
         {progressSections.map((section) => {
