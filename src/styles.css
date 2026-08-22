@@ -134,7 +134,7 @@ section { position: relative; }
 .frow h3 { font-weight: 400; font-size: clamp(1.2rem, 5.5vw, 1.6rem); grid-column: 2; }
 .frow p { grid-column: 2; color: var(--dim); font-size: 14.5px; }
 
-/* white-label live demo (mobile-first stacked) */
+/* branded live demo (mobile-first stacked) */
 .wl-demo { margin-top: 2.4rem; }
 .brandtabs { display: flex; gap: 8px; margin-bottom: 1.4rem; flex-wrap: wrap; }
 .brandtabs button { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; cursor: pointer;
