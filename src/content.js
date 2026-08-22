@@ -133,17 +133,17 @@ export const SERVICES = [
     spec: [["Multi-Platform Dispatcher", "SCHEDULED"], ["Automated Lead Qualification", "RUNNING"], ["Growth Sentiment Tracking", "ACTIVE"]],
   },
   {
-    n: "09", en: "MESSAGING", icon: "ai",
-    title: { ar: "قنوات المراسلة كأداة عمل متكاملة", en: "Business Messaging Infrastructure" },
+    n: "09", en: "WHATSAPP", icon: "ai",
+    title: { ar: "واتساب كقناة عمل متكاملة", en: "WhatsApp Business Infrastructure" },
     desc: {
-      ar: "نربط قنوات المراسلة بالكامل بأنظمتكم — ردود تلقائية ذكية، طلبات مباشرة، إشعارات فورية، ودعم عملاء — بأتمتة كاملة من طرف إلى طرف.",
-      en: "Transform business messaging into an enterprise sales and support engine — dialect-aware bots, direct ordering, instant notifications and shared inboxes.",
+      ar: "نربط واتساب بالكامل بأنظمتكم — ردود تلقائية ذكية، طلبات مباشرة، إشعارات فورية، ودعم عملاء — بأتمتة كاملة من طرف إلى طرف.",
+      en: "Transform WhatsApp into an enterprise sales and support engine — official cloud APIs, dialect-aware bots, direct ordering, and shared inboxes.",
     },
     bullets: {
-      ar: ["واجهات مراسلة رسمية", "مساعد ذكي باللهجة المحلية", "صندوق وارد مشترك للفريق"],
-      en: ["Official Messaging API", "Dialect-Aware AI Assistant", "Multi-Agent Inbox"],
+      ar: ["WhatsApp Business API رسمي", "مساعد ذكي باللهجة المحلية", "صندوق وارد مشترك للفريق"],
+      en: ["Official WhatsApp Business API", "Dialect-Aware AI Assistant", "Multi-Agent Inbox"],
     },
-    spec: [["Official Messaging Webhook", "CONNECTED"], ["Dialect NLP Matcher", "TRAINED"], ["Instant Contact Sync", "SYNCED"]],
+    spec: [["Official Cloud API Webhook", "CONNECTED"], ["Dialect NLP Matcher", "TRAINED"], ["Instant Contact Sync", "SYNCED"]],
   },
   {
     n: "10", en: "DASHBOARDS", icon: "platform",
