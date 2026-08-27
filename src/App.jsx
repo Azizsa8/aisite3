@@ -1,11 +1,15 @@
 import React, { useRef, useEffect, useLayoutEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BRAND, CONTACT, NAV, HERO, SERVICES_KICKER, SERVICES, SVC_LINKS, FORM } from "./content.js";
+import { BRAND, CONTACT, NAV, HERO, SERVICES_KICKER, SERVICES, SVC_LINKS, FORM, SEO, MISC, LEGAL } from "./content.js";
 import Mark, { MARK_PATHS } from "./Mark.jsx";
 import LineIcon from "./Icons.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SITE = "https://www.aisers.net";
+const prefersReduced = () =>
+  typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function primeDraw(root, sel) {
   root.querySelectorAll(sel).forEach((p) => {
@@ -15,11 +19,52 @@ function primeDraw(root, sel) {
   });
 }
 
+// ---- tiny path-based router helpers ----
+function slugIndex(slug) {
+  return SERVICES.findIndex((s) => s.slug === slug);
+}
+function pathFor(page, i) {
+  if (page === "service") return `/services/${SERVICES[i].slug}`;
+  if (page === "legal") return `/${i}`; // i = "privacy" | "terms"
+  return "/";
+}
+function routeFromPath(pathname) {
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts.length === 0) return { page: "home", i: 0 };
+  if (parts[0] === "services" && parts[1]) {
+    const idx = slugIndex(parts[1]);
+    if (idx >= 0) return { page: "service", i: idx };
+    return { page: "notfound", i: 0 };
+  }
+  if (parts[0] === LEGAL.privacy.slug) return { page: "legal", i: "privacy" };
+  if (parts[0] === LEGAL.terms.slug) return { page: "legal", i: "terms" };
+  return { page: "notfound", i: 0 };
+}
+
+function setMeta(name, content) {
+  let el = document.querySelector(`meta[name="${name}"]`) || document.querySelector(`meta[property="${name}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    if (name.startsWith("og:") || name.startsWith("twitter:")) el.setAttribute("property", name);
+    else el.setAttribute("name", name);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", content);
+}
+function setCanonical(href) {
+  let el = document.querySelector('link[rel="canonical"]');
+  if (!el) { el = document.createElement("link"); el.setAttribute("rel", "canonical"); document.head.appendChild(el); }
+  el.setAttribute("href", href);
+}
+
 export default function App() {
-  const [lang, setLang] = useState("ar");
+  const [lang, setLangState] = useState(() => {
+    try { return localStorage.getItem("aisers_lang") || "ar"; } catch { return "ar"; }
+  });
   const [menu, setMenu] = useState(false);
-  const [route, setRoute] = useState({ page: "home", i: 0 });
-  const [selected, setSelected] = useState([]); // service indices for the proposal
+  const [route, setRoute] = useState(() => routeFromPath(window.location.pathname));
+  const [selected, setSelected] = useState([]);
+  const [flashIdx, setFlashIdx] = useState(null);
   const [booted, setBooted] = useState(false);
   const [activeSvc, setActiveSvc] = useState(0);
   const root = useRef(null);
@@ -30,11 +75,54 @@ export default function App() {
   const isAr = lang === "ar";
   const t = (o) => (o ? o[lang] : "");
 
+  const setLang = useCallback((l) => {
+    setLangState(l);
+    try { localStorage.setItem("aisers_lang", l); } catch {}
+  }, []);
+
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = isAr ? "rtl" : "ltr";
     document.documentElement.setAttribute("data-lang", lang);
   }, [lang, isAr]);
+
+  // ---- SEO: title / description / canonical per route + language ----
+  useEffect(() => {
+    let title, desc;
+    if (route.page === "service") {
+      const svc = SERVICES[route.i];
+      title = t(svc.title) + t(SEO.serviceSuffix);
+      desc = t(svc.desc);
+    } else if (route.page === "legal") {
+      const l = LEGAL[route.i];
+      title = t(l.title) + t(SEO.serviceSuffix);
+      desc = t(l.title);
+    } else if (route.page === "notfound") {
+      title = t(SEO.notFound.title);
+      desc = t(SEO.notFound.title);
+    } else {
+      title = t(SEO.home.title);
+      desc = t(SEO.home.desc);
+    }
+    document.title = title;
+    setMeta("description", desc);
+    setMeta("og:title", title);
+    setMeta("og:description", desc);
+    setMeta("og:locale", isAr ? "ar_SA" : "en_US");
+    setMeta("twitter:title", title);
+    setMeta("twitter:description", desc);
+    setCanonical(SITE + pathFor(route.page === "legal" ? "legal" : route.page, route.i));
+  }, [route, lang]);
+
+  // ---- popstate: browser Back/Forward ----
+  useEffect(() => {
+    const onPop = () => {
+      setRoute(routeFromPath(window.location.pathname));
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   // Hide the intro strokes BEFORE first paint so nothing flashes fully-drawn.
   useLayoutEffect(() => {
@@ -44,6 +132,7 @@ export default function App() {
 
   // Preloader: draw the mark, illuminate, hold, then fade to reveal the hero.
   useEffect(() => {
+    if (prefersReduced()) { setBooted(true); document.body.style.overflow = ""; return; }
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => { setBooted(true); document.body.style.overflow = ""; },
@@ -63,26 +152,58 @@ export default function App() {
     return () => ctx.revert();
   }, []);
 
+  // Cinematic navigation — full page changes (home <-> service <-> legal).
   const go = useCallback((page, i = 0, scrollTarget = null) => {
     setMenu(false);
+    const path = pathFor(page, i);
+    const samePath = window.location.pathname === path;
+
+    if (prefersReduced()) {
+      if (!samePath) window.history.pushState({}, "", path);
+      setRoute({ page, i });
+      window.scrollTo(0, 0);
+      if (scrollTarget) requestAnimationFrame(() => document.getElementById(scrollTarget)?.scrollIntoView());
+      return;
+    }
+
     const el = xfade.current;
     primeDraw(el, ".xpath");
     const tl = gsap.timeline();
     tl.set(el, { yPercent: 100 })
       .to(el, { yPercent: 0, duration: 0.5, ease: "power3.inOut" })
       .to(el.querySelectorAll(".xpath"), { strokeDashoffset: 0, duration: 0.5, stagger: 0.05, ease: "power2.out" }, "-=0.15")
-      .add(() => { setRoute({ page, i }); window.scrollTo(0, 0); })
+      .add(() => {
+        if (!samePath) window.history.pushState({}, "", path);
+        setRoute({ page, i });
+        window.scrollTo(0, 0);
+      })
       .to(el, { yPercent: -100, duration: 0.55, ease: "power3.inOut", delay: 0.15 })
       .add(() => { if (scrollTarget) document.getElementById(scrollTarget)?.scrollIntoView(); })
       .set(el, { yPercent: 100 });
   }, []);
 
   const toggleSel = (i) => setSelected((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]));
-  const quickQuote = (i) => { setSelected((s) => (s.includes(i) ? s : [...s, i])); go("home", 0, "proposal"); };
+
+  // Quick quote — no cinematic wipe when already on the home scene; just a fast
+  // scroll to the form and a brief flash on the chip that was just preselected.
+  const quickQuote = useCallback((i) => {
+    setSelected((s) => (s.includes(i) ? s : [...s, i]));
+    setFlashIdx(i);
+    setTimeout(() => setFlashIdx(null), 1700);
+    if (route.page !== "home") {
+      go("home", 0, null);
+      setTimeout(() => {
+        document.getElementById("proposal")?.scrollIntoView({ behavior: prefersReduced() ? "auto" : "smooth", block: "start" });
+      }, 1250);
+    } else {
+      document.getElementById("proposal")?.scrollIntoView({ behavior: prefersReduced() ? "auto" : "smooth", block: "start" });
+    }
+  }, [route.page, go]);
 
   // ---- HOME animations ----
   useEffect(() => {
     if (route.page !== "home") return;
+    if (prefersReduced()) return; // leave everything statically visible
     const ctx = gsap.context(() => {
       primeDraw(root.current, ".glyph .gdraw");
 
@@ -118,8 +239,14 @@ export default function App() {
     return () => io.disconnect();
   }, [route.page, lang]);
 
+  const waHref = `https://wa.me/${CONTACT.wa}`;
+  const telHref = `tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`;
+  const mailHref = `mailto:${CONTACT.email}`;
+
   return (
     <div ref={root}>
+      <a href="#main" className="skip-link">{t(MISC.skipLink)}</a>
+
       {!booted && (
         <div className="preloader" ref={preRef}>
           <div className="pre-mark"><Mark size={54} stroke={7} glow={0} drawClass="preStroke" /></div>
@@ -160,17 +287,30 @@ export default function App() {
         ))}
       </div>
 
-      {route.page === "service"
-        ? <ServicePage svc={SERVICES[route.i]} idx={route.i} t={t} isAr={isAr} go={go} onQuick={() => quickQuote(route.i)} />
-        : (
-          <main>
+      <a className="wa-float" href={waHref} target="_blank" rel="noopener noreferrer" aria-label={t(MISC.waFloat)}>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.09-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18a7.9 7.9 0 0 1-4.2-1.22l-.3-.18-3.12.82.84-3.03-.2-.31A7.93 7.93 0 1 1 12 20Zm4.4-5.9c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.63-1.18-1.4-1.32-1.64-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.57.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28Z"/></svg>
+        {t(MISC.waFloat)}
+      </a>
+
+      <main id="main">
+        {route.page === "service" && (
+          <ServicePage svc={SERVICES[route.i]} idx={route.i} t={t} isAr={isAr} go={go} onQuick={() => quickQuote(route.i)} />
+        )}
+        {route.page === "legal" && <LegalPage doc={LEGAL[route.i]} t={t} isAr={isAr} go={go} />}
+        {route.page === "notfound" && <NotFound t={t} isAr={isAr} go={go} />}
+        {route.page === "home" && (
+          <>
             {/* HERO */}
             <section id="hero">
               <div className="wrap">
                 <div className="hero-kick"><span className="kick" style={{ margin: 0 }}>{HERO.kicker}</span></div>
                 <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>
                 <div className="wordmark" dir="ltr">
-                  <span className="rule" /><h1>{"AISERS".split("").map((c, i) => <span key={i}>{c}</span>)}</h1><span className="rule" />
+                  <span className="rule" />
+                  <h1 aria-label={`AISERS SYSTEMS — ${t(HERO.tagline)}`}>
+                    {"AISERS".split("").map((c, i) => <span key={i} aria-hidden="true">{c}</span>)}
+                  </h1>
+                  <span className="rule" />
                 </div>
                 <div className="sub" dir="ltr">SYSTEMS</div>
                 <p className="hero-tag">{t(HERO.tagline)}</p>
@@ -219,15 +359,27 @@ export default function App() {
             </section>
 
             {/* PROPOSAL FORM */}
-            <ProposalForm t={t} isAr={isAr} selected={selected} toggleSel={toggleSel} />
-
-            <footer className="foot">
-              <div className="bm"><Mark size={9} stroke={9} glow={0.6} /></div>
-              <div className="c">{t(CONTACT.cities)} · {CONTACT.phone} · {CONTACT.email}</div>
-            </footer>
-          </main>
+            <ProposalForm t={t} isAr={isAr} selected={selected} toggleSel={toggleSel} flashIdx={flashIdx} />
+          </>
         )}
+        <SiteFooter t={t} isAr={isAr} go={go} telHref={telHref} mailHref={mailHref} />
+      </main>
     </div>
+  );
+}
+
+function SiteFooter({ t, isAr, go, telHref, mailHref }) {
+  return (
+    <footer className="foot">
+      <div className="bm"><Mark size={9} stroke={9} glow={0.6} /></div>
+      <div className="c">
+        {t(CONTACT.cities)} · <a href={telHref} dir="ltr">{CONTACT.phone}</a> · <a href={mailHref}>{CONTACT.email}</a>
+      </div>
+      <div className="legal">
+        <a href={`/${LEGAL.privacy.slug}`} onClick={(e) => { e.preventDefault(); go("legal", "privacy"); }}>{t(LEGAL.privacy.nav)}</a>
+        <a href={`/${LEGAL.terms.slug}`} onClick={(e) => { e.preventDefault(); go("legal", "terms"); }}>{t(LEGAL.terms.nav)}</a>
+      </div>
+    </footer>
   );
 }
 
@@ -237,6 +389,7 @@ function ServicePage({ svc, idx, t, isAr, go, onQuick }) {
   const next = (idx + 1) % total;
 
   useEffect(() => {
+    if (prefersReduced()) return;
     const ctx = gsap.context(() => {
       primeDraw(document, ".svc-hero-glyph .gdraw");
       const tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.15 });
@@ -264,7 +417,8 @@ function ServicePage({ svc, idx, t, isAr, go, onQuick }) {
         {/* jump-to index: all 11, current highlighted */}
         <div className="svc-index" role="tablist">
           {SERVICES.map((s, k) => (
-            <button key={s.n} className={`idxchip ${k === idx ? "on" : ""}`} onClick={() => k !== idx && go("service", k)} title={t(s.title)}>
+            <button key={s.n} className={`idxchip ${k === idx ? "on" : ""}`} aria-current={k === idx ? "page" : undefined}
+              onClick={() => k !== idx && go("service", k)} title={t(s.title)}>
               {s.n}
             </button>
           ))}
@@ -281,7 +435,8 @@ function ServicePage({ svc, idx, t, isAr, go, onQuick }) {
                 <div className="bullet" key={i}><span className="dot" />{b}</div>
               ))}
             </div>
-            <div className="hero-cta" style={{ marginTop: "2.2rem" }}>
+            <p className="lead" style={{ marginTop: "1.4rem", fontSize: "13.5px" }}>{t(MISC.pricingNote)}</p>
+            <div className="hero-cta" style={{ marginTop: "1.2rem" }}>
               <button className="btn solid" onClick={onQuick}>{t(SVC_LINKS.quick)} <span className="ar">→</span></button>
             </div>
           </div>
@@ -319,7 +474,50 @@ function ServicePage({ svc, idx, t, isAr, go, onQuick }) {
   );
 }
 
-function ProposalForm({ t, isAr, selected, toggleSel }) {
+function LegalPage({ doc, t, isAr, go }) {
+  useEffect(() => {
+    if (prefersReduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".staticpage h1, .staticpage .updated, .staticpage section", {
+        y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: "power3.out",
+      });
+    });
+    return () => ctx.revert();
+  }, [doc]);
+
+  return (
+    <section className="subpage">
+      <div className="wrap staticpage">
+        <a className="back" onClick={() => go("home")} style={{ cursor: "pointer" }}>
+          <span className="ar">←</span> {isAr ? "الرئيسية" : "Home"}
+        </a>
+        <h1 style={{ fontWeight: 200, fontSize: "clamp(1.8rem, 7vw, 2.6rem)" }}>{t(doc.title)}</h1>
+        <p className="updated mono" style={{ color: "var(--dim)", fontSize: 12, marginTop: "0.6rem" }}>{t(doc.updated)}</p>
+        {doc.sections.map((s, i) => (
+          <section key={i}>
+            <h2>{t(s.h)}</h2>
+            <p>{t(s.p)}</p>
+          </section>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function NotFound({ t, isAr, go }) {
+  return (
+    <section className="notfound">
+      <div className="code mono">{MISC.notFound.code}</div>
+      <h1>{t(MISC.notFound.title)}</h1>
+      <p className="lead">{t(MISC.notFound.body)}</p>
+      <div className="hero-cta" style={{ marginTop: "1.6rem" }}>
+        <button className="btn solid" onClick={() => go("home")}>{t(MISC.notFound.home)} <span className="ar">→</span></button>
+      </div>
+    </section>
+  );
+}
+
+function ProposalForm({ t, isAr, selected, toggleSel, flashIdx }) {
   const [f, setF] = useState({ name: "", org: "", phone: "", email: "", details: "" });
   const [sent, setSent] = useState(false);
   const F = FORM.fields;
@@ -352,7 +550,8 @@ function ProposalForm({ t, isAr, selected, toggleSel }) {
             {["name", "org", "phone", "email"].map((k) => (
               <label className="field" key={k}>
                 <span>{t(F[k])}{F[k].req && <b> *</b>}</span>
-                <input type={k === "email" ? "email" : k === "phone" ? "tel" : "text"}
+                <input name={k} type={k === "email" ? "email" : k === "phone" ? "tel" : "text"}
+                  placeholder={F[k].ph ? t(F[k].ph) : undefined}
                   required={F[k].req} value={f[k]} onChange={set(k)} dir={k === "phone" || k === "email" ? "ltr" : undefined} />
               </label>
             ))}
@@ -365,7 +564,10 @@ function ProposalForm({ t, isAr, selected, toggleSel }) {
             </div>
             <div className="chips">
               {SERVICES.map((s, i) => (
-                <button type="button" key={s.n} className={`chip ${selected.includes(i) ? "on" : ""}`} onClick={() => toggleSel(i)}>
+                <button type="button" key={s.n}
+                  className={`chip ${selected.includes(i) ? "on" : ""} ${flashIdx === i ? "flash" : ""}`}
+                  aria-pressed={selected.includes(i)}
+                  onClick={() => toggleSel(i)}>
                   <span className="cn">{s.n}</span>{t(s.title)}
                 </button>
               ))}
@@ -374,7 +576,8 @@ function ProposalForm({ t, isAr, selected, toggleSel }) {
 
           <label className="field">
             <span>{t(F.details)}<b> *</b></span>
-            <textarea rows={4} required value={f.details} onChange={set("details")} />
+            <textarea name="details" rows={4} required placeholder={F.details.ph ? t(F.details.ph) : undefined}
+              value={f.details} onChange={set("details")} />
           </label>
 
           <button className="btn solid submit" type="submit">

@@ -28,7 +28,7 @@ export const SERVICES_KICKER = { ar: "استعراض الخدمات · ١١ خد
 
 export const SERVICES = [
   {
-    n: "01", en: "WORKFLOWS", icon: "platform",
+    n: "01", en: "WORKFLOWS", slug: "workflow-automation", icon: "platform",
     title: { ar: "أتمتة سير العمل", en: "Workflow Automation" },
     desc: {
       ar: "نبني أنظمة أتمتة مخصصة لعملياتكم اليومية تقلل التدخل اليدوي وتُسرّع التنفيذ.",
@@ -41,7 +41,7 @@ export const SERVICES = [
     spec: [["Event triggers & webhooks", "ACTIVE"], ["ETL & transformation flow", "<10MS"], ["Automated error recovery", "SYNCED"]],
   },
   {
-    n: "02", en: "AI PLATFORMS", icon: "ai",
+    n: "02", en: "AI PLATFORMS", slug: "ai-platforms", icon: "ai",
     title: { ar: "منصات AI جاهزة، بهويتكم الكاملة", en: "Turnkey AI Platforms" },
     desc: {
       ar: "تختارون منصة ذكاء اصطناعي جاهزة، ترسلون لنا هويتكم البصرية، ونطبّقها عليها بالكامل. بعد ذلك تربطون حساباتكم البنكية وتبدأون باستقبال اشتراكات مستخدميكم مباشرة.",
@@ -55,7 +55,7 @@ export const SERVICES = [
     spec: [["Local inference engine", "ONLINE"], ["Enterprise vector knowledge", "READY"], ["Automated billing gateway", "SECURE"]],
   },
   {
-    n: "03", en: "ANIMATED WEB", icon: "brand",
+    n: "03", en: "ANIMATED WEB", slug: "animated-web", icon: "brand",
     title: { ar: "مواقع متحركة عالية الجودة", en: "High-End Motion Websites" },
     desc: {
       ar: "نصمم ونطوّر مواقع متحركة كاملة لعلامتكم التجارية، بحركات وتفاعلات مصممة خصيصًا لهويتكم.",
@@ -68,7 +68,7 @@ export const SERVICES = [
     spec: [["Physics & motion engine", "60 FPS"], ["Micro-interactions pipeline", "OPTIMIZED"], ["Performance score", "98/100"]],
   },
   {
-    n: "04", en: "CUSTOM PLATFORMS", icon: "platform",
+    n: "04", en: "CUSTOM PLATFORMS", slug: "custom-platforms", icon: "platform",
     title: { ar: "منصات وحلول مخصّصة من الصفر", en: "Custom Platforms & Software" },
     desc: {
       ar: "عندما لا يناسب أي منتج جاهز احتياجكم، نبني منصتكم أو حلّكم الرقمي من الصفر لمعالجة تعقيدات عملكم الخاصة.",
@@ -81,7 +81,7 @@ export const SERVICES = [
     spec: [["Distributed core backend", "RESILIENT"], ["High-availability DB cluster", "99.99%"], ["Automated CI/CD deployment", "AUTOMATED"]],
   },
   {
-    n: "05", en: "BRANDED APPS", icon: "brand",
+    n: "05", en: "BRANDED APPS", slug: "branded-apps", icon: "brand",
     title: { ar: "أنظمة جاهزة بهويتكم — إطلاق مباشر وربحية كاملة", en: "Branded Turnkey Solutions" },
     desc: {
       ar: "نُجهّز منصات وتطبيقات سحابية ونطبّق هويتكم البصرية عليها بالكامل: الشعار، الألوان، والنطاق. تطرحونها كمنتجكم الخاص وتحتفظون بـ 100% من الإيرادات والاشتراكات.",
@@ -94,7 +94,7 @@ export const SERVICES = [
     spec: [["Brand identity engine", "LOCKED"], ["Multi-tenant isolation layer", "ACTIVE"], ["Branded client apps (mobile & desktop)", "DEPLOYED"]],
   },
   {
-    n: "06", en: "ONLINE STORES", icon: "platform",
+    n: "06", en: "ONLINE STORES", slug: "online-stores", icon: "platform",
     title: { ar: "متاجر إلكترونية مبنية خصيصًا لكم", en: "Bespoke E-Commerce Stores" },
     desc: {
       ar: "نبني متجركم الإلكتروني من الصفر بالشكل والتجربة التي تناسب علامتكم، بدل قالب جاهز ومحدود يحدّ من هويتكم.",
@@ -107,7 +107,7 @@ export const SERVICES = [
     spec: [["Headless commerce core", "FAST"], ["Omnichannel payment link", "ENABLED"], ["Real-time warehouse sync", "LIVE"]],
   },
   {
-    n: "07", en: "STORE AUTOMATION", icon: "ai",
+    n: "07", en: "STORE AUTOMATION", slug: "store-automation", icon: "ai",
     title: { ar: "أتمتة العمليات داخل متجركم", en: "E-Commerce Operations Automation" },
     desc: {
       ar: "نؤتمت العمليات المتكررة في متجركم القائم: تحديث المخزون، ومعالجة الطلبات، والتواصل مع العملاء، لتقليل الأخطاء وزيادة الكفاءة.",
@@ -120,7 +120,7 @@ export const SERVICES = [
     spec: [["Multi-branch stock sync", "SYNCED"], ["Auto tax e-invoicing", "VERIFIED"], ["Abandoned cart recovery", "+24% ROI"]],
   },
   {
-    n: "08", en: "SOCIAL MARKETING", icon: "brand",
+    n: "08", en: "SOCIAL MARKETING", slug: "social-marketing", icon: "brand",
     title: { ar: "تسويق اجتماعي يعمل بدون تدخل يومي", en: "Automated Social & Growth Marketing" },
     desc: {
       ar: "ننشئ أنظمة تؤتمت جدولة المحتوى والنشر والتفاعل عبر منصاتكم الاجتماعية.",
@@ -133,7 +133,7 @@ export const SERVICES = [
     spec: [["Multi-platform dispatcher", "SCHEDULED"], ["Automated lead qualification", "RUNNING"], ["Growth sentiment tracking", "ACTIVE"]],
   },
   {
-    n: "09", en: "WHATSAPP", icon: "ai",
+    n: "09", en: "WHATSAPP", slug: "whatsapp", icon: "ai",
     title: { ar: "واتساب كقناة عمل متكاملة", en: "WhatsApp Business Infrastructure" },
     desc: {
       ar: "نربط واتساب بالكامل بأنظمتكم: ردود تلقائية، طلبات مباشرة، إشعارات فورية، ودعم عملاء، بأتمتة كاملة.",
@@ -146,7 +146,7 @@ export const SERVICES = [
     spec: [["Official cloud API webhook", "CONNECTED"], ["Dialect NLP matcher", "TRAINED"], ["Instant contact sync", "SYNCED"]],
   },
   {
-    n: "10", en: "DASHBOARDS", icon: "platform",
+    n: "10", en: "DASHBOARDS", slug: "dashboards", icon: "platform",
     title: { ar: "لوحات تحكم وأنظمة تتبع مخصصة", en: "Custom Dashboards & BI" },
     desc: {
       ar: "نبني لوحات تحكم وأنظمة تتبع مصمّمة لمقاييسكم وعملياتكم أنتم، لا مقاييس عامة، لتمنح متخذي القرار رؤية لحظية.",
@@ -159,7 +159,7 @@ export const SERVICES = [
     spec: [["Live data ingestion stream", "STREAMING"], ["Executive KPI radar", "ACCURATE"], ["PDF/Excel auto reports", "SCHEDULED"]],
   },
   {
-    n: "11", en: "CONSULTING", icon: "sovereign",
+    n: "11", en: "CONSULTING", slug: "consulting", icon: "sovereign",
     title: { ar: "استشارات في الأعمال والتقنية", en: "Strategic Tech Consulting" },
     desc: {
       ar: "نراجع معكم عملياتكم الحالية، ونوصي بالمسار الأنسب: أتمتة، منصة جاهزة، حل مخصص، أو نظام بهويتكم.",
@@ -189,14 +189,129 @@ export const FORM = {
     en: "Configure your service bundle, enter your requirements, and submit to send your request directly to our team.",
   },
   fields: {
-    name: { ar: "الاسم الكامل", en: "Full Name", req: true },
-    org: { ar: "اسم المنشأة / الجهة", en: "Company / Organization", req: true },
-    phone: { ar: "رقم الجوال", en: "Mobile Number", req: true },
-    email: { ar: "البريد الإلكتروني للعمل", en: "Business Email", req: false },
-    details: { ar: "تفاصيل الطلب والاحتياجات الخاصة", en: "Project Scope & Custom Requirements", req: true },
+    name: { ar: "الاسم الكامل", en: "Full Name", req: true, ph: { ar: "مثال: محمد العتيبي", en: "e.g. Mohammed Al-Otaibi" } },
+    org: { ar: "اسم المنشأة / الجهة", en: "Company / Organization", req: true, ph: { ar: "اسم شركتكم", en: "Your company name" } },
+    phone: { ar: "رقم الجوال", en: "Mobile Number", req: true, ph: { ar: "05XXXXXXXX", en: "+966 5X XXX XXXX" } },
+    email: { ar: "البريد الإلكتروني للعمل", en: "Business Email", req: false, ph: { ar: "name@company.com", en: "name@company.com" } },
+    details: { ar: "تفاصيل الطلب والاحتياجات الخاصة", en: "Project Scope & Custom Requirements", req: true, ph: { ar: "صف احتياجكم باختصار…", en: "Briefly describe what you need…" } },
   },
   selectLabel: { ar: "حددوا الخدمات الإضافية التي تودون ضمّها للعرض:", en: "Select additional capabilities to include in this proposal:" },
-  counter: { ar: (n) => `${n} خدمات إضافية مختارة`, en: (n) => `${n} capabilities selected` },
+  // Full Arabic plural agreement (0 / 1 / 2 / 3–10 / 11+) + Arabic-Indic digits, matching "١١ خدمة" above.
+  counter: {
+    ar: (n) => {
+      if (n === 0) return "لا خدمات إضافية مختارة";
+      if (n === 1) return "خدمة إضافية واحدة مختارة";
+      if (n === 2) return "خدمتان إضافيتان مختارتان";
+      const digits = toArabicDigits(n);
+      if (n >= 3 && n <= 10) return `${digits} خدمات إضافية مختارة`;
+      return `${digits} خدمة إضافية مختارة`;
+    },
+    en: (n) => `${n} ${n === 1 ? "capability" : "capabilities"} selected`,
+  },
   submit: { ar: "إرسال الطلب", en: "Send Request" },
   sending: { ar: "جارٍ تحويلكم…", en: "Redirecting…" },
+};
+
+export function toArabicDigits(n) {
+  const map = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+  return String(n).replace(/[0-9]/g, (d) => map[d]);
+}
+
+// ---- SEO: per-route title/description (used to update document.head on nav) ----
+export const SEO = {
+  site: { ar: "أيسرز سيستمز", en: "AISERS SYSTEMS" },
+  home: {
+    title: { ar: "أيسرز سيستمز — أنظمة برمجية سيادية وأتمتة ومنصات رقمية | الرياض", en: "AISERS SYSTEMS — Sovereign Software, Automation & Digital Platforms | Riyadh" },
+    desc: {
+      ar: "بيت برمجيات سعودي في الرياض يبني أنظمة سيادية وحلول أتمتة ومنصات رقمية تملكونها بالكامل. ١١ خدمة من التأسيس التقني إلى الاستشارات.",
+      en: "A Riyadh-based systems & software house building sovereign software, automation and digital platforms you own outright. 11 services from build to consulting.",
+    },
+  },
+  serviceSuffix: { ar: " | أيسرز سيستمز", en: " | AISERS SYSTEMS" },
+  notFound: {
+    title: { ar: "الصفحة غير موجودة | أيسرز سيستمز", en: "Page Not Found | AISERS SYSTEMS" },
+  },
+};
+
+export const MISC = {
+  skipLink: { ar: "تخطَّ إلى المحتوى", en: "Skip to content" },
+  waFloat: { ar: "تواصل واتساب", en: "Chat on WhatsApp" },
+  notFound: {
+    code: "404",
+    title: { ar: "هذه الصفحة غير موجودة", en: "This page doesn't exist" },
+    body: { ar: "قد يكون الرابط قديمًا أو غير صحيح.", en: "The link may be outdated or incorrect." },
+    home: { ar: "العودة للرئيسية", en: "Back to home" },
+  },
+  pricingNote: {
+    ar: "السعر النهائي يُحدَّد بعد مراجعة نطاق العمل. اطلبوا عرضًا مخصصًا أدناه.",
+    en: "Final pricing is determined after scoping the work. Request a tailored quote below.",
+  },
+};
+
+export const LEGAL = {
+  privacy: {
+    slug: "privacy",
+    nav: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
+    title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
+    updated: { ar: "آخر تحديث: أغسطس 2026", en: "Last updated: August 2026" },
+    sections: [
+      {
+        h: { ar: "المعلومات التي نجمعها", en: "Information we collect" },
+        p: {
+          ar: "عند تعبئة نموذج طلب العرض، نجمع اسمكم واسم منشأتكم ورقم جوالكم وبريدكم الإلكتروني (إن أدخلتموه) وتفاصيل طلبكم. لا نجمع أي بيانات دون تعبئتكم للنموذج بأنفسكم.",
+          en: "When you submit the proposal form, we collect your name, organization, mobile number, email (if provided), and the details of your request. We do not collect any data unless you submit the form yourself.",
+        },
+      },
+      {
+        h: { ar: "كيف نستخدم معلوماتكم", en: "How we use your information" },
+        p: {
+          ar: "نستخدم هذه المعلومات فقط للتواصل معكم بخصوص طلبكم وإعداد عرض السعر المناسب. لا نبيع بياناتكم ولا نشاركها مع أي طرف ثالث لأغراض تسويقية.",
+          en: "We use this information only to contact you about your request and prepare a suitable quote. We do not sell your data or share it with third parties for marketing purposes.",
+        },
+      },
+      {
+        h: { ar: "استضافة البيانات", en: "Data hosting" },
+        p: {
+          ar: "بيانات طلبكم تُرسل مباشرة إلى فريقنا عبر واتساب عند إرسال النموذج. لا تُخزَّن بيانات الطلبات على خوادم هذا الموقع.",
+          en: "Your request data is sent directly to our team via WhatsApp when you submit the form. Request data is not stored on this website's servers.",
+        },
+      },
+      {
+        h: { ar: "تواصلوا معنا", en: "Contact us" },
+        p: {
+          ar: "لأي استفسار بخصوص خصوصيتكم، راسلونا على hello@aisers.sa.",
+          en: "For any privacy questions, reach us at hello@aisers.sa.",
+        },
+      },
+    ],
+  },
+  terms: {
+    slug: "terms",
+    nav: { ar: "الشروط والأحكام", en: "Terms of Service" },
+    title: { ar: "الشروط والأحكام", en: "Terms of Service" },
+    updated: { ar: "آخر تحديث: أغسطس 2026", en: "Last updated: August 2026" },
+    sections: [
+      {
+        h: { ar: "نطاق الخدمات", en: "Scope of services" },
+        p: {
+          ar: "الخدمات الموضّحة في هذا الموقع وصفٌ عام لقدراتنا. نطاق العمل والأتعاب والجدول الزمني الفعلي لكل مشروع يُحدَّد كتابيًا بعد ورشة تقييم أو استشارة أولية.",
+          en: "The services described on this site are a general description of our capabilities. The actual scope, fees, and timeline for any project are defined in writing after an assessment workshop or initial consultation.",
+        },
+      },
+      {
+        h: { ar: "طلبات العروض", en: "Proposal requests" },
+        p: {
+          ar: "إرسال نموذج طلب العرض لا يُنشئ التزامًا تعاقديًا من أي طرف. أي اتفاقية تصبح سارية فقط بعد توقيع الطرفين على عرض أو عقد مكتوب.",
+          en: "Submitting the proposal form does not create a contractual obligation for either party. Any agreement takes effect only once both parties sign a written proposal or contract.",
+        },
+      },
+      {
+        h: { ar: "الملكية الفكرية", en: "Intellectual property" },
+        p: {
+          ar: "ما لم يُنص على خلاف ذلك في العقد، تنتقل ملكية الأنظمة والأكواد المخصصة المبنية لكم إليكم عند اكتمال المشروع والسداد الكامل.",
+          en: "Unless otherwise stated in the contract, ownership of custom systems and code built for you transfers to you upon project completion and full payment.",
+        },
+      },
+    ],
+  },
 };
