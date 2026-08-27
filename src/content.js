@@ -36,9 +36,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["ربط الأنظمة المؤسسية", "محركات أتمتة متقدمة", "تقليل التكلفة التشغيلية"],
-      en: ["Enterprise Systems Integration", "Advanced Automation Engines", "Zero Per-Seat Fees"],
+      en: ["Enterprise systems integration", "Advanced automation engines", "Zero per-seat fees"],
     },
-    spec: [["Event Triggers & Webhooks", "ACTIVE"], ["ETL & Transformation Flow", "<10MS"], ["Automated Error Recovery", "SYNCED"]],
+    spec: [["Event triggers & webhooks", "ACTIVE"], ["ETL & transformation flow", "<10MS"], ["Automated error recovery", "SYNCED"]],
   },
   {
     n: "02", en: "AI PLATFORMS", icon: "ai",
@@ -49,10 +49,10 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["نماذج ذكاء اصطناعي محلية 100%", "بوابات دفع محلية", "بحث ذكي في مستندات الشركة"],
-      en: ["100% On-Premise Models", "Local Payment Gateways", "Internal Document Intelligence"],
+      en: ["100% on-premise models", "Local payment gateways", "Internal document intelligence"],
     },
     altCta: { ar: "استعراض 30+ منصة جاهزة للتملك", en: "Explore 30+ Ready AI Platforms" },
-    spec: [["Local Inference Engine", "ONLINE"], ["Enterprise Vector Knowledge", "READY"], ["Automated Billing Gateway", "SECURE"]],
+    spec: [["Local inference engine", "ONLINE"], ["Enterprise vector knowledge", "READY"], ["Automated billing gateway", "SECURE"]],
   },
   {
     n: "03", en: "ANIMATED WEB", icon: "brand",
@@ -63,9 +63,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["حركات 60fps سينمائية", "محركات حركة ورسوميات متقدمة", "سرعة تحميل قياسية 95+"],
-      en: ["60fps Physics Motion", "Advanced Motion & Graphics", "95+ Performance Score"],
+      en: ["60fps physics motion", "Advanced motion & graphics", "95+ performance score"],
     },
-    spec: [["Physics & Motion Engine", "60 FPS"], ["Micro-Interactions Pipeline", "OPTIMIZED"], ["Performance Score", "98/100"]],
+    spec: [["Physics & motion engine", "60 FPS"], ["Micro-interactions pipeline", "OPTIMIZED"], ["Performance score", "98/100"]],
   },
   {
     n: "04", en: "CUSTOM PLATFORMS", icon: "platform",
@@ -76,9 +76,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["معمارية خدمات مصغّرة", "كود مصدري ملك لكم", "أمان مؤسسي متشدد"],
-      en: ["Microservices Infrastructure", "100% Owned IP Code", "Hardened Security"],
+      en: ["Microservices infrastructure", "100% owned IP code", "Hardened security"],
     },
-    spec: [["Distributed Core Backend", "RESILIENT"], ["High-Availability DB Cluster", "99.99%"], ["Automated CI/CD Deployment", "AUTOMATED"]],
+    spec: [["Distributed core backend", "RESILIENT"], ["High-availability DB cluster", "99.99%"], ["Automated CI/CD deployment", "AUTOMATED"]],
   },
   {
     n: "05", en: "BRANDED APPS", icon: "brand",
@@ -89,9 +89,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["إطلاق فوري بهويتكم", "تطبيقات سطح مكتب وجوال", "100% إيرادات لكم"],
-      en: ["Live in 14 Days", "Desktop & Mobile Apps", "100% Revenue Kept"],
+      en: ["Live in 14 days", "Desktop & mobile apps", "100% revenue kept"],
     },
-    spec: [["Brand Identity Engine", "LOCKED"], ["Multi-Tenant Isolation Layer", "ACTIVE"], ["Branded Client Apps (Mobile & Desktop)", "DEPLOYED"]],
+    spec: [["Brand identity engine", "LOCKED"], ["Multi-tenant isolation layer", "ACTIVE"], ["Branded client apps (mobile & desktop)", "DEPLOYED"]],
   },
   {
     n: "06", en: "ONLINE STORES", icon: "platform",
@@ -102,9 +102,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["دفع فوري سريع", "ربط شركات الشحن والمستودعات", "تجربة جوال فائقة السلاسة"],
-      en: ["Instant 1-Click Checkout", "Warehouse & Courier Sync", "Sub-Second Mobile UX"],
+      en: ["Instant 1-click checkout", "Warehouse & courier sync", "Sub-second mobile UX"],
     },
-    spec: [["Headless Commerce Core", "FAST"], ["Omnichannel Payment Link", "ENABLED"], ["Real-time Warehouse Sync", "LIVE"]],
+    spec: [["Headless commerce core", "FAST"], ["Omnichannel payment link", "ENABLED"], ["Real-time warehouse sync", "LIVE"]],
   },
   {
     n: "07", en: "STORE AUTOMATION", icon: "ai",
@@ -115,9 +115,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["مزامنة المخزون لحظياً", "الفوترة الإلكترونية الضريبية آلياً", "إشعارات تتبع الشحنات الفورية"],
-      en: ["Realtime Multi-Branch Sync", "Automated Tax E-Invoicing", "Instant Order-Tracking Notifications"],
+      en: ["Realtime multi-branch sync", "Automated tax e-invoicing", "Instant order-tracking notifications"],
     },
-    spec: [["Multi-Branch Stock Sync", "SYNCED"], ["Auto Tax E-Invoicing", "VERIFIED"], ["Abandoned Cart Recovery", "+24% ROI"]],
+    spec: [["Multi-branch stock sync", "SYNCED"], ["Auto tax e-invoicing", "VERIFIED"], ["Abandoned cart recovery", "+24% ROI"]],
   },
   {
     n: "08", en: "SOCIAL MARKETING", icon: "brand",
@@ -128,9 +128,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["نشر متعدد القنوات", "ردود آلية على الرسائل", "تقارير أداء دورية"],
-      en: ["Multi-Network Dispatch", "Auto-DM Lead Qualification", "Attribution Reports"],
+      en: ["Multi-network dispatch", "Auto-DM lead qualification", "Attribution reports"],
     },
-    spec: [["Multi-Platform Dispatcher", "SCHEDULED"], ["Automated Lead Qualification", "RUNNING"], ["Growth Sentiment Tracking", "ACTIVE"]],
+    spec: [["Multi-platform dispatcher", "SCHEDULED"], ["Automated lead qualification", "RUNNING"], ["Growth sentiment tracking", "ACTIVE"]],
   },
   {
     n: "09", en: "WHATSAPP", icon: "ai",
@@ -141,9 +141,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["WhatsApp Business API رسمي", "مساعد ذكي باللهجة المحلية", "صندوق وارد مشترك للفريق"],
-      en: ["Official WhatsApp Business API", "Dialect-Aware AI Assistant", "Multi-Agent Inbox"],
+      en: ["Official WhatsApp Business API", "Dialect-aware AI assistant", "Multi-agent inbox"],
     },
-    spec: [["Official Cloud API Webhook", "CONNECTED"], ["Dialect NLP Matcher", "TRAINED"], ["Instant Contact Sync", "SYNCED"]],
+    spec: [["Official cloud API webhook", "CONNECTED"], ["Dialect NLP matcher", "TRAINED"], ["Instant contact sync", "SYNCED"]],
   },
   {
     n: "10", en: "DASHBOARDS", icon: "platform",
@@ -154,9 +154,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["بيانات لحظية Real-time", "تنبيهات فورية عند الانحراف", "عزل الصلاحيات RBAC"],
-      en: ["Streaming Realtime BI", "Anomaly Threshold Alerts", "Granular RBAC"],
+      en: ["Streaming realtime BI", "Anomaly threshold alerts", "Granular RBAC"],
     },
-    spec: [["Live Data Ingestion Stream", "STREAMING"], ["Executive KPI Radar", "ACCURATE"], ["PDF/Excel Auto Reports", "SCHEDULED"]],
+    spec: [["Live data ingestion stream", "STREAMING"], ["Executive KPI radar", "ACCURATE"], ["PDF/Excel auto reports", "SCHEDULED"]],
   },
   {
     n: "11", en: "CONSULTING", icon: "sovereign",
@@ -167,9 +167,9 @@ export const SERVICES = [
     },
     bullets: {
       ar: ["تحليل التكلفة الإجمالية", "ضمان الامتثال لأنظمة حماية البيانات", "تصميم خارطة التحول الرقمي"],
-      en: ["Total Cost Analysis", "Data-Protection Compliance", "5-Year Tech Roadmap"],
+      en: ["Total cost analysis", "Data-protection compliance", "5-year tech roadmap"],
     },
-    spec: [["Architecture Audit Protocol", "AUDITED"], ["Data-Protection Compliance", "COMPLIANT"], ["Digital Transformation Map", "READY"]],
+    spec: [["Architecture audit protocol", "AUDITED"], ["Data-protection compliance", "COMPLIANT"], ["Digital transformation map", "READY"]],
   },
 ];
 
