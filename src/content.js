@@ -18,8 +18,8 @@ export const NAV = {
 export const HERO = {
   kicker: "A SYSTEMS & SOFTWARE HOUSE · RIYADH",
   tagline: {
-    ar: "نبني المنظومات البرمجية السيادية، الأتمتة المتقدمة، والمنصات الرقمية التي تقود نمو أعمالكم — مصمّمة للسيطرة والامتلاك الكامل، وتحت علامتكم التجارية.",
-    en: "We architect sovereign software engines, mission-critical automations, and enterprise platforms — engineered for total ownership, absolute control, and unstoppable scale.",
+    ar: "نبني أنظمة برمجية سيادية، وحلول أتمتة، ومنصات رقمية تملكونها بالكامل وتُدار تحت علامتكم التجارية.",
+    en: "We build sovereign software, automation, and platforms you own outright and run under your own brand.",
   },
   cta: { ar: "استعراض الخدمات", en: "Explore Services" },
 };
@@ -31,8 +31,8 @@ export const SERVICES = [
     n: "01", en: "WORKFLOWS", icon: "platform",
     title: { ar: "أتمتة سير العمل", en: "Workflow Automation" },
     desc: {
-      ar: "نبني أنظمة أتمتة مخصصة لعمليات عملكم اليومية، من الشركات الناشئة إلى المؤسسات الكبرى، لتقليل التدخل اليدوي وتسريع التنفيذ.",
-      en: "We engineer bespoke automation workflows for daily operations, eliminating manual friction from startups to enterprises.",
+      ar: "نبني أنظمة أتمتة مخصصة لعملياتكم اليومية تقلل التدخل اليدوي وتُسرّع التنفيذ.",
+      en: "We build automation workflows for daily operations that cut manual work and speed up execution.",
     },
     bullets: {
       ar: ["ربط الأنظمة المؤسسية", "محركات أتمتة متقدمة", "تقليل التكلفة التشغيلية"],
@@ -45,7 +45,7 @@ export const SERVICES = [
     title: { ar: "منصات AI جاهزة، بهويتكم الكاملة", en: "Turnkey AI Platforms" },
     desc: {
       ar: "تختارون منصة ذكاء اصطناعي جاهزة، ترسلون لنا هويتكم البصرية، ونطبّقها عليها بالكامل. بعد ذلك تربطون حساباتكم البنكية وتبدأون باستقبال اشتراكات مستخدميكم مباشرة.",
-      en: "Select a turnkey AI workspace, apply your visual identity, connect local merchant accounts, and monetize subscriptions immediately.",
+      en: "Pick a ready AI workspace, apply your identity, connect local merchant accounts, and start collecting subscription payments.",
     },
     bullets: {
       ar: ["نماذج ذكاء اصطناعي محلية 100%", "بوابات دفع محلية", "بحث ذكي في مستندات الشركة"],
@@ -58,8 +58,8 @@ export const SERVICES = [
     n: "03", en: "ANIMATED WEB", icon: "brand",
     title: { ar: "مواقع متحركة عالية الجودة", en: "High-End Motion Websites" },
     desc: {
-      ar: "نصمم وننفّذ مواقع متحركة بالكامل لعلامتكم التجارية بمستوى بصري سينمائي وحركات تفاعلية فريدة تعكس ريادتكم في السوق.",
-      en: "We craft immersive, 60fps physics-driven websites that elevate your brand and drastically boost conversion rates.",
+      ar: "نصمم ونطوّر مواقع متحركة كاملة لعلامتكم التجارية، بحركات وتفاعلات مصممة خصيصًا لهويتكم.",
+      en: "We build 60fps, physics-driven websites with custom motion and interactions for your brand.",
     },
     bullets: {
       ar: ["حركات 60fps سينمائية", "محركات حركة ورسوميات متقدمة", "سرعة تحميل قياسية 95+"],
@@ -71,8 +71,8 @@ export const SERVICES = [
     n: "04", en: "CUSTOM PLATFORMS", icon: "platform",
     title: { ar: "منصات وحلول مخصّصة من الصفر", en: "Custom Platforms & Software" },
     desc: {
-      ar: "عندما لا يفي أي منتج جاهز بالغرض، نبني منصتكم أو حلّكم الرقمي المخصص بالكامل من الأساس لمعالجة تعقيدات أعمالكم الفريدة.",
-      en: "Full-cycle software engineering designed for high concurrency, rock-solid security, and full intellectual property ownership.",
+      ar: "عندما لا يناسب أي منتج جاهز احتياجكم، نبني منصتكم أو حلّكم الرقمي من الصفر لمعالجة تعقيدات عملكم الخاصة.",
+      en: "When no off-the-shelf product fits, we build your platform from the ground up, engineered for high concurrency, strong security, and full IP ownership.",
     },
     bullets: {
       ar: ["معمارية خدمات مصغّرة", "كود مصدري ملك لكم", "أمان مؤسسي متشدد"],
@@ -84,8 +84,8 @@ export const SERVICES = [
     n: "05", en: "BRANDED APPS", icon: "brand",
     title: { ar: "أنظمة جاهزة بهويتكم — إطلاق مباشر وربحية كاملة", en: "Branded Turnkey Solutions" },
     desc: {
-      ar: "نقوم بتهيئة منصات وتطبيقات سحابية متقدمة وتطبيق هويتكم البصرية عليها بالكامل — الشعار، الألوان، النطاق — لتطرحونها كمنتجكم الحصري وتحتفظون بـ 100% من الإيرادات والاشتراكات.",
-      en: "Repackage world-class platforms into your exclusive branded product. Keep 100% of recurring subscriber revenues.",
+      ar: "نُجهّز منصات وتطبيقات سحابية ونطبّق هويتكم البصرية عليها بالكامل: الشعار، الألوان، والنطاق. تطرحونها كمنتجكم الخاص وتحتفظون بـ 100% من الإيرادات والاشتراكات.",
+      en: "We set up cloud platforms and apps under your full visual identity: logo, colors, and domain. You launch it as your own product and keep 100% of subscription revenue.",
     },
     bullets: {
       ar: ["إطلاق فوري بهويتكم", "تطبيقات سطح مكتب وجوال", "100% إيرادات لكم"],
@@ -97,8 +97,8 @@ export const SERVICES = [
     n: "06", en: "ONLINE STORES", icon: "platform",
     title: { ar: "متاجر إلكترونية مبنية خصيصًا لكم", en: "Bespoke E-Commerce Stores" },
     desc: {
-      ar: "نبني متجركم الإلكتروني من الصفر بالشكل والتجربة التي تناسب علامتكم، بدل الاعتماد على قالب جاهز ومحدود يضعف تميزكم التجاري.",
-      en: "Custom e-commerce platforms engineered for extreme responsiveness, instant local checkout, and warehouse inventory integration.",
+      ar: "نبني متجركم الإلكتروني من الصفر بالشكل والتجربة التي تناسب علامتكم، بدل قالب جاهز ومحدود يحدّ من هويتكم.",
+      en: "We build your store from the ground up instead of relying on a limited template, with fast checkout and warehouse inventory integration.",
     },
     bullets: {
       ar: ["دفع فوري سريع", "ربط شركات الشحن والمستودعات", "تجربة جوال فائقة السلاسة"],
@@ -110,8 +110,8 @@ export const SERVICES = [
     n: "07", en: "STORE AUTOMATION", icon: "ai",
     title: { ar: "أتمتة العمليات داخل متجركم", en: "E-Commerce Operations Automation" },
     desc: {
-      ar: "من تحديث المخزون إلى معالجة الطلبات والتواصل مع العملاء، نؤتمت العمليات المتكررة داخل متجركم القائم لتقليص الأخطاء وزيادة الإنتاجية والربحية.",
-      en: "Automate stock synchronization across physical branches, auto-dispatch tax invoices, and trigger instant order-tracking notifications.",
+      ar: "نؤتمت العمليات المتكررة في متجركم القائم: تحديث المخزون، ومعالجة الطلبات، والتواصل مع العملاء، لتقليل الأخطاء وزيادة الكفاءة.",
+      en: "We automate the repeat work in your existing store: syncing stock across branches, sending tax invoices, and triggering order-tracking notifications.",
     },
     bullets: {
       ar: ["مزامنة المخزون لحظياً", "الفوترة الإلكترونية الضريبية آلياً", "إشعارات تتبع الشحنات الفورية"],
@@ -123,8 +123,8 @@ export const SERVICES = [
     n: "08", en: "SOCIAL MARKETING", icon: "brand",
     title: { ar: "تسويق اجتماعي يعمل بدون تدخل يومي", en: "Automated Social & Growth Marketing" },
     desc: {
-      ar: "ننشئ أنظمة تؤتمت جدولة المحتوى، النشر، والتفاعل عبر منصاتكم الاجتماعية لتعزيز حضور علامتكم التجارية ونموها المستمر.",
-      en: "End-to-end automated social marketing engines handling multi-network publishing, auto-replies, and lead qualification.",
+      ar: "ننشئ أنظمة تؤتمت جدولة المحتوى والنشر والتفاعل عبر منصاتكم الاجتماعية.",
+      en: "We build automated systems that handle content scheduling, multi-network publishing, and lead qualification for your social channels.",
     },
     bullets: {
       ar: ["نشر متعدد القنوات", "ردود آلية على الرسائل", "تقارير أداء دورية"],
@@ -136,8 +136,8 @@ export const SERVICES = [
     n: "09", en: "WHATSAPP", icon: "ai",
     title: { ar: "واتساب كقناة عمل متكاملة", en: "WhatsApp Business Infrastructure" },
     desc: {
-      ar: "نربط واتساب بالكامل بأنظمتكم — ردود تلقائية ذكية، طلبات مباشرة، إشعارات فورية، ودعم عملاء — بأتمتة كاملة من طرف إلى طرف.",
-      en: "Transform WhatsApp into an enterprise sales and support engine — official cloud APIs, dialect-aware bots, direct ordering, and shared inboxes.",
+      ar: "نربط واتساب بالكامل بأنظمتكم: ردود تلقائية، طلبات مباشرة، إشعارات فورية، ودعم عملاء، بأتمتة كاملة.",
+      en: "We connect WhatsApp to your systems for sales and support: official cloud APIs, dialect-aware bots, direct ordering, and shared inboxes.",
     },
     bullets: {
       ar: ["WhatsApp Business API رسمي", "مساعد ذكي باللهجة المحلية", "صندوق وارد مشترك للفريق"],
@@ -149,8 +149,8 @@ export const SERVICES = [
     n: "10", en: "DASHBOARDS", icon: "platform",
     title: { ar: "لوحات تحكم وأنظمة تتبع مخصصة", en: "Custom Dashboards & BI" },
     desc: {
-      ar: "نبني لوحات تحكم وأنظمة تتبع مصمّمة خصيصًا لمقاييسكم وعملياتكم، لا مقاييس أحد آخر، لتمكين متخذي القرار برؤية لحظية حية.",
-      en: "Consolidate scattered company databases into high-speed, live executive dashboards with smart threshold alerts.",
+      ar: "نبني لوحات تحكم وأنظمة تتبع مصمّمة لمقاييسكم وعملياتكم أنتم، لا مقاييس عامة، لتمنح متخذي القرار رؤية لحظية.",
+      en: "We bring your company data together into live dashboards with threshold alerts, built for decision-makers.",
     },
     bullets: {
       ar: ["بيانات لحظية Real-time", "تنبيهات فورية عند الانحراف", "عزل الصلاحيات RBAC"],
@@ -162,8 +162,8 @@ export const SERVICES = [
     n: "11", en: "CONSULTING", icon: "sovereign",
     title: { ar: "استشارات في الأعمال والتقنية", en: "Strategic Tech Consulting" },
     desc: {
-      ar: "نجلس معكم لتحليل عملياتكم الحالية، ونوصي بالمسار الأنسب: أتمتة، منصة جاهزة، حل مخصص، أو نظام بهويتكم بأعلى عائد استثماري.",
-      en: "Deep architectural audits, TCO analysis, and vendor-neutral roadmaps ensuring your software assets generate maximum value.",
+      ar: "نراجع معكم عملياتكم الحالية، ونوصي بالمسار الأنسب: أتمتة، منصة جاهزة، حل مخصص، أو نظام بهويتكم.",
+      en: "We audit your architecture, analyze total cost of ownership, and build a vendor-neutral roadmap for your software investments.",
     },
     bullets: {
       ar: ["تحليل التكلفة الإجمالية", "ضمان الامتثال لأنظمة حماية البيانات", "تصميم خارطة التحول الرقمي"],
