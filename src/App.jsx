@@ -19,6 +19,20 @@ function primeDraw(root, sel) {
   });
 }
 
+// Pill-badge section kicker: small illuminated chip + label.
+function Kick({ children, ...rest }) {
+  return (
+    <span className="kick" {...rest}>
+      <i className="ic" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor">
+          <path d="M12 1.5 14.2 9.8 22.5 12 14.2 14.2 12 22.5 9.8 14.2 1.5 12 9.8 9.8 Z" />
+        </svg>
+      </i>
+      <span>{children}</span>
+    </span>
+  );
+}
+
 // ---- tiny path-based router helpers ----
 function slugIndex(slug) {
   return SERVICES.findIndex((s) => s.slug === slug);
@@ -302,8 +316,9 @@ export default function App() {
           <>
             {/* HERO */}
             <section id="hero">
+              <div className="hero-stars" aria-hidden="true" />
               <div className="wrap">
-                <div className="hero-kick"><span className="kick" style={{ margin: 0 }}>{HERO.kicker}</span></div>
+                <div className="hero-kick"><Kick style={{ margin: 0 }}>{HERO.kicker}</Kick></div>
                 <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>
                 <div className="wordmark" dir="ltr">
                   <span className="rule" />
@@ -333,7 +348,7 @@ export default function App() {
               </div>
 
               <div className="svc-track">
-                <div className="svc-intro wrap"><span className="kick">{t(SERVICES_KICKER)}</span></div>
+                <div className="svc-intro wrap"><Kick>{t(SERVICES_KICKER)}</Kick></div>
                 {SERVICES.map((s, i) => (
                   <article id={`svc-${i}`} className={`svc-step ${i === activeSvc ? "active" : ""}`} data-idx={i} key={s.n}>
                     <div className="svc-step-in wrap">
@@ -427,8 +442,8 @@ function ServicePage({ svc, idx, t, isAr, go, onQuick }) {
         <div className="svc-detail">
           <div className="svc-detail-main">
             <div className="glyph svc-hero-glyph" style={{ margin: "0 0 1.6rem" }}><LineIcon name={svc.icon} size={84} drawClass="gdraw" /></div>
-            <span className="kick">{svc.n} · {svc.en}</span>
-            <h1 style={{ fontWeight: 200, fontSize: "clamp(2rem, 8vw, 3.4rem)", letterSpacing: "-0.01em", lineHeight: 1.08 }}>{t(svc.title)}</h1>
+            <Kick>{svc.n} · {svc.en}</Kick>
+            <h1 className="svc-title">{t(svc.title)}</h1>
             <p className="lead">{t(svc.desc)}</p>
             <div className="bullets">
               {svc.bullets[isAr ? "ar" : "en"].map((b, i) => (
@@ -541,7 +556,7 @@ function ProposalForm({ t, isAr, selected, toggleSel, flashIdx }) {
     <section id="proposal" className="blk">
       <div className="wrap">
         <div className="glyph"><LineIcon name="next" size={88} drawClass="gdraw" /></div>
-        <span className="kick" data-reveal>{FORM.kicker}</span>
+        <Kick data-reveal>{FORM.kicker}</Kick>
         <h2 data-reveal>{t(FORM.title)}</h2>
         <p className="lead" data-reveal>{t(FORM.intro)}</p>
 
