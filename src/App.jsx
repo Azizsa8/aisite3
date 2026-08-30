@@ -1,9 +1,12 @@
-import React, { useRef, useEffect, useLayoutEffect, useState, useCallback } from "react";
+import React, { useRef, useEffect, useLayoutEffect, useState, useCallback, lazy, Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BRAND, CONTACT, NAV, PORTFOLIO_NAV, HERO, PROOF, SERVICES_KICKER, SERVICES, SVC_LINKS, PORTFOLIO_PAGE, PORTFOLIO, FORM, SEO, MISC, LEGAL } from "./content.js";
 import Mark, { MARK_PATHS } from "./Mark.jsx";
 import LineIcon from "./Icons.jsx";
+// Lazy-load the 3D scene: three.js is ~800KB and must never block first paint.
+// The preloader animation covers the fetch; reduced-motion visitors never load it.
+const Scene3D = lazy(() => import("./Scene3D.jsx"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,6 +90,7 @@ export default function App() {
   const fill = useRef(null);
   const xfade = useRef(null);
   const preRef = useRef(null);
+  const sceneProgress = useRef(0); // 0..1 scroll progress feeding the 3D scene
 
   const isAr = lang === "ar";
   const t = (o) => (o ? o[lang] : "");
@@ -227,6 +231,10 @@ export default function App() {
 
       gsap.to(fill.current, { width: "100%", ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
 
+      // master scroll progress → drives the persistent 3D scene's camera orbit
+      sceneProgress.current = 0;
+      gsap.to(sceneProgress, { current: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.5 } });
+
       gsap.utils.toArray(".glyph").forEach((g) => {
         gsap.to(g.querySelectorAll(".gdraw"), { strokeDashoffset: 0, duration: 1.2, stagger: 0.12, ease: "power2.out",
           scrollTrigger: { trigger: g, start: "top 88%" } });
@@ -337,9 +345,15 @@ export default function App() {
         {route.page === "notfound" && <NotFound t={t} isAr={isAr} go={go} />}
         {route.page === "home" && (
           <>
+            {/* Persistent 3D sovereign core — fixed behind the whole page.
+                Reduced-motion visitors get the static starfield instead. */}
+            {prefersReduced()
+              ? null
+              : <Suspense fallback={null}><Scene3D progress={sceneProgress} active={activeSvc} total={SERVICES.length} /></Suspense>}
+
             {/* HERO */}
             <section id="hero">
-              <div className="hero-stars" aria-hidden="true" />
+              {prefersReduced() && <div className="hero-stars" aria-hidden="true" />}
               <div className="wrap">
                 <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>
                 <div className="wordmark" dir="ltr">
@@ -364,10 +378,12 @@ export default function App() {
             {/* SERVICES — scroll-driven scene, lighting changes per active service */}
             <section id="services" className="svc-scene">
               <div className="svc-ambient" aria-hidden="true">
-                <div className="svc-glow" style={{
+                {/* the 3D scene is the ambient lighting now; the glow div is only
+                    needed as a fallback when the canvas isn't mounted */}
+                {prefersReduced() && <div className="svc-glow" style={{
                   left: `${50 + Math.cos((activeSvc / SERVICES.length) * Math.PI * 2) * 26}%`,
                   top: `${46 + Math.sin((activeSvc / SERVICES.length) * Math.PI * 2) * 22}%`,
-                }} />
+                }} />}
                 <div className="svc-ghost">{SERVICES[activeSvc].n}</div>
                 <div className="svc-counter mono">{SERVICES[activeSvc].n} <span>/ 11</span></div>
               </div>

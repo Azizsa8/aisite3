@@ -298,7 +298,10 @@ section { position: relative; }
 .svc-track { position: relative; z-index: 1; }
 .svc-intro { padding: 4rem 0 1rem; }
 .svc-step { min-height: 82vh; display: flex; align-items: center; padding: 3vh 0; scroll-margin-top: 60px; }
-.svc-step-in { max-width: 640px; opacity: 0.28; transform: translateY(12px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.svc-step-in { max-width: 640px; opacity: 0.28; transform: translateY(12px); transition: opacity .6s var(--ease), transform .6s var(--ease); position: relative; }
+/* soft scrim so step text stays legible wherever the 3D core drifts behind it */
+.svc-step-in::before { content: ""; position: absolute; inset: -2.5rem -3.5rem; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,0.62), rgba(0,0,0,0) 75%); }
 .svc-step.active .svc-step-in { opacity: 1; transform: none; }
 .svc-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 1rem; }
 .svc-mn { font-family: var(--font-mark); font-size: clamp(1.3rem, 6vw, 2.2rem); }
@@ -311,7 +314,7 @@ section { position: relative; }
 .svc-bullets li { display: flex; align-items: center; gap: 0.7rem; font-size: 14.5px; color: var(--ink); }
 .svc-bullets .dot { width: 5px; height: 5px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px var(--glow); flex: none; }
 .svc-status { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.8rem; }
-.stat-chip { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.03em; color: var(--dim); border: 1px solid var(--line-soft); border-radius: 999px; padding: 6px 12px; }
+.stat-chip { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.03em; color: var(--dim); border: 1px solid var(--line-soft); border-radius: 999px; padding: 6px 12px; background: rgba(0,0,0,0.55); }
 .stat-chip b { color: #fff; font-weight: 500; margin-inline-end: 6px; }
 .svc-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
@@ -412,6 +415,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .reveal { will-change: transform, opacity; }
+
+/* ===== persistent 3D scene (home page) ===== */
+.scene3d { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; animation: sceneIn 1.4s ease 0.3s forwards; }
+.scene3d canvas { display: block; width: 100% !important; height: 100% !important; }
+@keyframes sceneIn { to { opacity: 1; } }
+#main { position: relative; z-index: 1; }
 
 /* ===== proof strip ===== */
 .proof { padding: clamp(3.5rem, 12vw, 6rem) 0; border-top: 1px solid var(--line-soft); text-align: center; }
