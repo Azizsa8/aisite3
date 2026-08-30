@@ -15,6 +15,8 @@ export const NAV = {
   en: [["services", "Services"], ["proposal", "Request Proposal"]],
 };
 
+export const PORTFOLIO_NAV = { ar: "أعمالنا", en: "Portfolio" };
+
 export const HERO = {
   kicker: "A SYSTEMS & SOFTWARE HOUSE · RIYADH",
   tagline: {
@@ -25,6 +27,26 @@ export const HERO = {
 };
 
 export const SERVICES_KICKER = { ar: "استعراض الخدمات · ١١ خدمة", en: "Service Catalog · 11 capabilities" };
+
+// ---- Proof strip: real, verifiable claims only — no fabricated numbers. ----
+export const PROOF = {
+  kicker: { ar: "لماذا أيسرز", en: "Why AISERS" },
+  stats: [
+    {
+      value: 11,
+      suffix: "",
+      label: { ar: "خدمة تقنية متكاملة", en: "Integrated service lines" },
+      note: { ar: "من الأتمتة إلى الاستشارات، تحت سقف واحد", en: "From automation to consulting, under one roof" },
+    },
+    {
+      value: 100,
+      suffix: "%",
+      label: { ar: "سيادة كاملة على بياناتكم", en: "Full data sovereignty" },
+      note: { ar: "بياناتكم تبقى داخل المملكة دائمًا", en: "Your data stays in the Kingdom — always" },
+    },
+  ],
+  ctaLabel: { ar: "استعرضوا أعمالنا", en: "See Our Work" },
+};
 
 export const SERVICES = [
   {
@@ -173,6 +195,31 @@ export const SERVICES = [
   },
 ];
 
+// ---- Portfolio: placeholder entries — swap for the real project list. ----
+export const PORTFOLIO_PAGE = {
+  kicker: { ar: "أعمالنا · ٨ مشاريع", en: "Our Work · 8 projects" },
+  title: { ar: "مشاريع بنيناها لعملائنا", en: "Projects We've Built" },
+  intro: {
+    ar: "لمحة عن أنظمة ومنصات قمنا بتصميمها وتطويرها. تفاصيل هذه القائمة مؤقتة وسيتم استبدالها بمشاريعنا الفعلية.",
+    en: "A look at systems and platforms we've designed and built. This list is a placeholder and will be replaced with our real project roster.",
+  },
+  placeholderNote: {
+    ar: "* عناصر نائبة مؤقتة بانتظار قائمة المشاريع الفعلية.",
+    en: "* Placeholder entries, pending the real project list.",
+  },
+};
+
+export const PORTFOLIO = [
+  { n: "01", tag: { ar: "منصة سحابية", en: "Cloud Platform" }, title: { ar: "منصة إدارة عمليات", en: "Ops Management Platform" }, blurb: { ar: "منصة داخلية لتنسيق الفرق والمهام في الوقت الفعلي.", en: "An internal platform coordinating teams and tasks in real time." } },
+  { n: "02", tag: { ar: "أتمتة", en: "Automation" }, title: { ar: "نظام أتمتة مخزون", en: "Inventory Automation System" }, blurb: { ar: "أتمتة كاملة لمزامنة المخزون بين عدة فروع.", en: "End-to-end automation syncing stock across multiple branches." } },
+  { n: "03", tag: { ar: "تجارة إلكترونية", en: "E-Commerce" }, title: { ar: "متجر إلكتروني مخصص", en: "Bespoke Online Store" }, blurb: { ar: "متجر مبني من الصفر بتجربة دفع سريعة.", en: "A ground-up storefront with a fast, custom checkout flow." } },
+  { n: "04", tag: { ar: "واتساب", en: "WhatsApp" }, title: { ar: "بنية واتساب للأعمال", en: "WhatsApp Business Infrastructure" }, blurb: { ar: "ربط كامل لواتساب بأنظمة الطلبات والدعم.", en: "Full WhatsApp integration with ordering and support systems." } },
+  { n: "05", tag: { ar: "لوحة تحكم", en: "Dashboard" }, title: { ar: "لوحة تحكم تنفيذية", en: "Executive BI Dashboard" }, blurb: { ar: "رؤية لحظية لمؤشرات الأداء الرئيسية.", en: "Live visibility into key operational metrics." } },
+  { n: "06", tag: { ar: "تطبيق بهوية العميل", en: "Branded App" }, title: { ar: "تطبيق جوال بهوية كاملة", en: "Fully Branded Mobile App" }, blurb: { ar: "تطبيق جوال أُطلق بهوية العميل الكاملة خلال أسابيع.", en: "A mobile app launched under the client's full identity in weeks." } },
+  { n: "07", tag: { ar: "ذكاء اصطناعي", en: "AI Platform" }, title: { ar: "مساعد ذكاء اصطناعي داخلي", en: "Internal AI Assistant" }, blurb: { ar: "مساعد ذكاء اصطناعي محلي للبحث في مستندات الشركة.", en: "An on-premise AI assistant for internal document search." } },
+  { n: "08", tag: { ar: "استشارات", en: "Consulting" }, title: { ar: "خارطة تحول رقمي", en: "Digital Transformation Roadmap" }, blurb: { ar: "خارطة طريق تقنية لمدة خمس سنوات لمؤسسة متوسطة.", en: "A five-year technology roadmap for a mid-size enterprise." } },
+];
+
 export const SVC_LINKS = {
   detail: { ar: "تفاصيل الخدمة وطلب العرض", en: "Deep-Dive & Request Quote" },
   quick: { ar: "طلب فوري لهذه الخدمة", en: "Quick Quote for this Service" },
@@ -228,6 +275,13 @@ export const SEO = {
     },
   },
   serviceSuffix: { ar: " | أيسرز سيستمز", en: " | AISERS SYSTEMS" },
+  portfolio: {
+    title: { ar: "أعمالنا | أيسرز سيستمز", en: "Our Work | AISERS SYSTEMS" },
+    desc: {
+      ar: "لمحة عن أنظمة ومنصات صممناها وطورناها لعملائنا.",
+      en: "A look at systems and platforms we've designed and built for our clients.",
+    },
+  },
   notFound: {
     title: { ar: "الصفحة غير موجودة | أيسرز سيستمز", en: "Page Not Found | AISERS SYSTEMS" },
   },

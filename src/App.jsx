@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useLayoutEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BRAND, CONTACT, NAV, HERO, SERVICES_KICKER, SERVICES, SVC_LINKS, FORM, SEO, MISC, LEGAL } from "./content.js";
+import { BRAND, CONTACT, NAV, PORTFOLIO_NAV, HERO, PROOF, SERVICES_KICKER, SERVICES, SVC_LINKS, PORTFOLIO_PAGE, PORTFOLIO, FORM, SEO, MISC, LEGAL } from "./content.js";
 import Mark, { MARK_PATHS } from "./Mark.jsx";
 import LineIcon from "./Icons.jsx";
 
@@ -40,6 +40,7 @@ function slugIndex(slug) {
 function pathFor(page, i) {
   if (page === "service") return `/services/${SERVICES[i].slug}`;
   if (page === "legal") return `/${i}`; // i = "privacy" | "terms"
+  if (page === "portfolio") return "/portfolio";
   return "/";
 }
 function routeFromPath(pathname) {
@@ -50,6 +51,7 @@ function routeFromPath(pathname) {
     if (idx >= 0) return { page: "service", i: idx };
     return { page: "notfound", i: 0 };
   }
+  if (parts[0] === "portfolio") return { page: "portfolio", i: 0 };
   if (parts[0] === LEGAL.privacy.slug) return { page: "legal", i: "privacy" };
   if (parts[0] === LEGAL.terms.slug) return { page: "legal", i: "terms" };
   return { page: "notfound", i: 0 };
@@ -111,6 +113,9 @@ export default function App() {
       const l = LEGAL[route.i];
       title = t(l.title) + t(SEO.serviceSuffix);
       desc = t(l.title);
+    } else if (route.page === "portfolio") {
+      title = t(SEO.portfolio.title);
+      desc = t(SEO.portfolio.desc);
     } else if (route.page === "notfound") {
       title = t(SEO.notFound.title);
       desc = t(SEO.notFound.title);
@@ -125,7 +130,7 @@ export default function App() {
     setMeta("og:locale", isAr ? "ar_SA" : "en_US");
     setMeta("twitter:title", title);
     setMeta("twitter:description", desc);
-    setCanonical(SITE + pathFor(route.page === "legal" ? "legal" : route.page, route.i));
+    setCanonical(SITE + pathFor(route.page, route.i));
   }, [route, lang]);
 
   // ---- popstate: browser Back/Forward ----
@@ -298,6 +303,7 @@ export default function App() {
           {NAV[lang].map(([id, label]) => (
             <a key={id} href={`#${id}`} onClick={(e) => { if (route.page !== "home") { e.preventDefault(); go("home", 0, id); } }}>{label}</a>
           ))}
+          <a href="/portfolio" onClick={(e) => { e.preventDefault(); go("portfolio"); }}>{t(PORTFOLIO_NAV)}</a>
         </nav>
         <div className="rt">
           <button className="lang" onClick={() => setLang(isAr ? "en" : "ar")}>{isAr ? "EN" : "ع"}</button>
@@ -312,6 +318,9 @@ export default function App() {
             {label}<span className="n">0{i + 1}</span>
           </a>
         ))}
+        <a href="/portfolio" onClick={(e) => { e.preventDefault(); setMenu(false); go("portfolio"); }}>
+          {t(PORTFOLIO_NAV)}<span className="n">0{NAV[lang].length + 1}</span>
+        </a>
       </div>
 
       <a className={`wa-float ${showWa ? "show" : ""}`} href={waHref} target="_blank" rel="noopener noreferrer" aria-label={t(MISC.waFloat)}>
@@ -324,6 +333,7 @@ export default function App() {
           <ServicePage svc={SERVICES[route.i]} idx={route.i} t={t} isAr={isAr} go={go} onQuick={() => quickQuote(route.i)} />
         )}
         {route.page === "legal" && <LegalPage doc={LEGAL[route.i]} t={t} isAr={isAr} go={go} />}
+        {route.page === "portfolio" && <PortfolioPage t={t} isAr={isAr} go={go} />}
         {route.page === "notfound" && <NotFound t={t} isAr={isAr} go={go} />}
         {route.page === "home" && (
           <>
@@ -347,6 +357,9 @@ export default function App() {
               </div>
               <div className="scrollcue"><span>{isAr ? "مرّروا" : "SCROLL"}</span><span className="bar" /></div>
             </section>
+
+            {/* PROOF STRIP — real, verifiable stats + gateway to the portfolio */}
+            <ProofStrip t={t} isAr={isAr} go={go} />
 
             {/* SERVICES — scroll-driven scene, lighting changes per active service */}
             <section id="services" className="svc-scene">
@@ -392,6 +405,92 @@ export default function App() {
         <SiteFooter t={t} isAr={isAr} go={go} telHref={telHref} mailHref={mailHref} />
       </main>
     </div>
+  );
+}
+
+function ProofStrip({ t, isAr, go }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (prefersReduced()) return;
+    const ctx = gsap.context(() => {
+      const nums = gsap.utils.toArray(".proof-num", ref.current);
+      const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: "top 80%", once: true } });
+      tl.from(".proof-card", { y: 30, opacity: 0, duration: 0.7, stagger: 0.15, ease: "power3.out" });
+      nums.forEach((el, i) => {
+        const target = Number(el.dataset.value);
+        const obj = { v: 0 };
+        tl.to(obj, {
+          v: target, duration: 1.2, ease: "power2.out",
+          onUpdate: () => { el.textContent = Math.round(obj.v) + (el.dataset.suffix || ""); },
+        }, i === 0 ? "-=0.3" : "<");
+      });
+      tl.from(".proof-cta", { y: 20, opacity: 0, scale: 0.92, duration: 0.6, ease: "back.out(1.6)" });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="proof" ref={ref}>
+      <div className="wrap">
+        <Kick>{t(PROOF.kicker)}</Kick>
+        <div className="proof-grid">
+          {PROOF.stats.map((s, i) => (
+            <div className="proof-card" key={i}>
+              <div className="proof-num mono" data-value={s.value} data-suffix={s.suffix}>{`0${s.suffix}`}</div>
+              <div className="proof-label">{t(s.label)}</div>
+              <div className="proof-note">{t(s.note)}</div>
+            </div>
+          ))}
+        </div>
+        <div className="proof-cta">
+          <button className="btn solid portfolio-cta" onClick={() => go("portfolio")}>
+            {t(PROOF.ctaLabel)} <span className="ar">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortfolioPage({ t, isAr, go }) {
+  useEffect(() => {
+    if (prefersReduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".subpage .kick, .subpage h1, .subpage .lead", { y: 20, opacity: 0, duration: 0.7, stagger: 0.08, ease: "power3.out" });
+      gsap.utils.toArray(".pf-card").forEach((card) => {
+        gsap.from(card, { y: 40, opacity: 0, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: card, start: "top 90%" } });
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="subpage">
+      <div className="wrap">
+        <a className="back" onClick={() => go("home")} style={{ cursor: "pointer" }}>
+          <span className="ar">←</span> {isAr ? "الرئيسية" : "Home"}
+        </a>
+        <div className="glyph"><LineIcon name="brand" size={72} /></div>
+        <Kick>{t(PORTFOLIO_PAGE.kicker)}</Kick>
+        <h1 className="svc-title">{t(PORTFOLIO_PAGE.title)}</h1>
+        <p className="lead">{t(PORTFOLIO_PAGE.intro)}</p>
+
+        <div className="pf-grid">
+          {PORTFOLIO.map((p) => (
+            <article className="pf-card" key={p.n}>
+              <div className="pf-thumb" aria-hidden="true"><span className="pf-n mono">{p.n}</span></div>
+              <div className="pf-body">
+                <span className="pf-tag mono">{t(p.tag)}</span>
+                <h3>{t(p.title)}</h3>
+                <p>{t(p.blurb)}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="pf-note mono">{t(PORTFOLIO_PAGE.placeholderNote)}</p>
+      </div>
+    </section>
   );
 }
 
