@@ -50,7 +50,10 @@ body {
   padding: 14px 20px;
   background: linear-gradient(#000, rgba(0,0,0,0));
 }
-.topbar .bm { display: flex; align-items: center; gap: 10px; }
+.topbar .bm {
+  display: flex; align-items: center; gap: 10px;
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
 .topbar .bm svg { height: 26px; width: auto; }
 .topbar .bm b { font-family: var(--font-mark); font-size: 12px; letter-spacing: 0.22em; font-weight: 400; }
 .topbar .rt { display: flex; align-items: center; gap: 14px; }
@@ -129,16 +132,23 @@ body {
 section { position: relative; }
 .blk { padding: clamp(4.5rem, 16vw, 9rem) 0; border-top: 1px solid var(--line-soft); }
 .kick {
-  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: none;
+  font-family: var(--font-mono); font-size: clamp(9.5px, 2.6vw, 11.5px); letter-spacing: 0.08em; text-transform: none;
   color: var(--ink); display: inline-flex; align-items: center; gap: 8px;
   margin-bottom: 1.4rem; padding: 7px 14px 7px 8px; border-radius: 999px;
   background: var(--bg-2); border: 1px solid var(--line);
+  white-space: nowrap; max-width: 100%;
 }
 [dir="rtl"] .kick { padding: 7px 8px 7px 14px; }
-.kick .ic { width: 18px; height: 18px; border-radius: 50%; background: var(--ink); color: var(--bg);
-  display: inline-grid; place-items: center; font-size: 10px; flex: none;
+.kick > span:last-child { overflow: hidden; text-overflow: ellipsis; }
+.kick .ic { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: var(--bg);
+  display: inline-grid; place-items: center; flex: none;
   box-shadow: 0 0 14px -2px var(--glow); }
-.kick .ic svg { display: block; }
+.kick .ic svg { display: block; width: 11px; height: 11px; }
+@media (max-width: 380px) {
+  .kick { font-size: 9px; letter-spacing: 0.04em; padding: 6px 12px 6px 6px; gap: 6px; }
+  [dir="rtl"] .kick { padding: 6px 6px 6px 12px; }
+  .kick .ic { width: 18px; height: 18px; }
+}
 
 /* service detail headline — same bold, glowing language as .blk h2 */
 .svc-title { font-weight: 700; font-size: clamp(2rem, 8vw, 3.4rem); letter-spacing: -0.02em; line-height: 1.08;
@@ -259,7 +269,6 @@ section { position: relative; }
 }
 
 /* ===== services catalog ===== */
-.hero-kick { margin-bottom: 22px; }
 .svc-grid { margin-top: 2.6rem; display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
 .svc-card { position: relative; background: var(--bg); border: none; text-align: start; cursor: pointer;
   padding: 1.5rem 1.4rem; color: var(--ink); font-family: inherit; display: flex; flex-direction: column; gap: 0.7rem;
@@ -365,10 +374,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: inline-flex; align-items: center; gap: 8px;
   background: #25D366; color: #05210F; text-decoration: none;
   padding: 13px 18px; border-radius: 100px; font-family: var(--font-mono); font-size: 13px; font-weight: 500;
-  box-shadow: 0 12px 30px -8px rgba(37,211,102,0.55); transition: transform .3s var(--ease);
+  box-shadow: 0 12px 30px -8px rgba(37,211,102,0.55);
+  transition: transform .3s var(--ease), opacity .3s var(--ease), visibility .3s;
+  /* Hidden until the visitor scrolls past the hero — it must never sit on
+     top of the hero's own CTA/scroll-cue, which live at the same screen
+     position on short mobile viewports. See App.jsx `showWa` state. */
+  opacity: 0; visibility: hidden; pointer-events: none;
 }
+.wa-float.show { opacity: 1; visibility: visible; pointer-events: auto; }
 .wa-float:hover { transform: translateY(-3px) scale(1.03); }
 .wa-float svg { width: 18px; height: 18px; flex: none; }
+@media (max-width: 380px) {
+  .wa-float span { display: none; } /* icon-only pill on very narrow screens */
+  .wa-float { padding: 13px; }
+}
 
 /* ===== not-found page ===== */
 .notfound { min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 140px 22px 60px; }

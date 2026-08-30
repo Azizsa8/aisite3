@@ -155,7 +155,6 @@ export default function App() {
         .to(".pre-mark", { filter: "brightness(1.6)", duration: 0.4, yoyo: true, repeat: 1 }, 1.15)
         .addLabel("reveal", "+=0.45")
         .to(".preloader", { autoAlpha: 0, duration: 0.75, ease: "power2.inOut" }, "reveal")
-        .from("#hero .hero-kick", { opacity: 0, y: 14, duration: 0.7 }, "reveal+=0.15")
         .from(".hero-mark", { opacity: 0, duration: 0.8 }, "reveal+=0.15")
         .from(".wordmark", { opacity: 0, y: 14, duration: 0.8 }, "reveal+=0.25")
         .from(".sub", { opacity: 0, duration: 0.8 }, "reveal+=0.35")
@@ -257,6 +256,20 @@ export default function App() {
   const telHref = `tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`;
   const mailHref = `mailto:${CONTACT.email}`;
 
+  // Show the floating WhatsApp button only once the visitor has scrolled past
+  // the hero — it must never sit on top of the hero's own CTA/scroll-cue,
+  // which land at the same screen position on short mobile viewports.
+  const [showWa, setShowWa] = useState(false);
+  useEffect(() => {
+    if (route.page !== "home") { setShowWa(true); return; }
+    setShowWa(false);
+    const heroEl = document.getElementById("hero");
+    if (!heroEl) { setShowWa(true); return; }
+    const io = new IntersectionObserver(([entry]) => setShowWa(!entry.isIntersecting), { threshold: 0.15 });
+    io.observe(heroEl);
+    return () => io.disconnect();
+  }, [route.page, booted]);
+
   return (
     <div ref={root}>
       <a href="#main" className="skip-link">{t(MISC.skipLink)}</a>
@@ -301,9 +314,9 @@ export default function App() {
         ))}
       </div>
 
-      <a className="wa-float" href={waHref} target="_blank" rel="noopener noreferrer" aria-label={t(MISC.waFloat)}>
+      <a className={`wa-float ${showWa ? "show" : ""}`} href={waHref} target="_blank" rel="noopener noreferrer" aria-label={t(MISC.waFloat)}>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.09-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18a7.9 7.9 0 0 1-4.2-1.22l-.3-.18-3.12.82.84-3.03-.2-.31A7.93 7.93 0 1 1 12 20Zm4.4-5.9c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.17-.7-.63-1.18-1.4-1.32-1.64-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.57.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28Z"/></svg>
-        {t(MISC.waFloat)}
+        <span>{t(MISC.waFloat)}</span>
       </a>
 
       <main id="main">
@@ -318,7 +331,6 @@ export default function App() {
             <section id="hero">
               <div className="hero-stars" aria-hidden="true" />
               <div className="wrap">
-                <div className="hero-kick"><Kick style={{ margin: 0 }}>{HERO.kicker}</Kick></div>
                 <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>
                 <div className="wordmark" dir="ltr">
                   <span className="rule" />
