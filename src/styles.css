@@ -101,8 +101,12 @@ body {
 /* soft scrim so the wordmark/tagline/CTA stay readable over the dithered mark */
 #hero .wrap::before { content: ""; position: absolute; inset: -10% -14%; z-index: -1; pointer-events: none;
   background: radial-gradient(ellipse 55% 48% at 50% 54%, rgba(0,0,0,0.66), rgba(0,0,0,0) 74%); }
-/* full-bleed dither-reveal layer: above the fixed 3D scene, below hero text */
-.hero-fx { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* full-bleed dither-reveal layer: above the fixed 3D scene, below hero text.
+   The gradient mask dims the field across the central band so the wordmark,
+   tagline and CTA always sit on quiet ground. */
+.hero-fx { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.85;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 26%, rgba(0,0,0,0.28) 40%, rgba(0,0,0,0.28) 72%, #000 86%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 26%, rgba(0,0,0,0.28) 40%, rgba(0,0,0,0.28) 72%, #000 86%); }
 .hero-mark { display: grid; place-items: center; margin-bottom: 30px; }
 .hero-mark svg path { filter: drop-shadow(0 0 6px var(--glow)); }
 .wordmark { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px; }
