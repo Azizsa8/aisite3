@@ -7,6 +7,7 @@ import LineIcon from "./Icons.jsx";
 // Lazy-load the 3D scene: three.js is ~800KB and must never block first paint.
 // The preloader animation covers the fetch; reduced-motion visitors never load it.
 const Scene3D = lazy(() => import("./Scene3D.jsx"));
+import DitherReveal from "./DitherReveal.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -164,7 +165,7 @@ export default function App() {
         .to(".pre-mark", { filter: "brightness(1.6)", duration: 0.4, yoyo: true, repeat: 1 }, 1.15)
         .addLabel("reveal", "+=0.45")
         .to(".preloader", { autoAlpha: 0, duration: 0.75, ease: "power2.inOut" }, "reveal")
-        .from(".hero-mark", { opacity: 0, duration: 0.8 }, "reveal+=0.15")
+        .from(".hero-fx, .hero-mark", { opacity: 0, duration: 1.1 }, "reveal+=0.15")
         .from(".wordmark", { opacity: 0, y: 14, duration: 0.8 }, "reveal+=0.25")
         .from(".sub", { opacity: 0, duration: 0.8 }, "reveal+=0.35")
         .from("#hero .hero-tag", { opacity: 0, y: 16, duration: 0.7 }, "reveal+=0.45")
@@ -354,8 +355,16 @@ export default function App() {
             {/* HERO */}
             <section id="hero">
               {prefersReduced() && <div className="hero-stars" aria-hidden="true" />}
+              {/* full-bleed dithered mark: Bayer-halftone AISERS mark rippling
+                  behind the type; the crisp glowing mark surfaces under the cursor */}
+              {!prefersReduced() && (
+                <div className="hero-fx" aria-hidden="true">
+                  <DitherReveal image="/mark-hero.svg" fit="cover" ditherStyle="bayer8"
+                    dotSize={4} revealRadius={170} revealSoftness={60} wave waveSpeed={38} waveDensity={18} />
+                </div>
+              )}
               <div className="wrap">
-                <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>
+                {prefersReduced() && <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>}
                 <div className="wordmark" dir="ltr">
                   <span className="rule" />
                   <h1 aria-label={`AISERS SYSTEMS — ${t(HERO.tagline)}`}>
