@@ -4,8 +4,8 @@
 
 export const BRAND = "AISERS";
 export const CONTACT = {
-  phone: "+966 50 315 9115",
-  wa: "966503159115",
+  phone: "+966 50 869 1529",
+  wa: "966508691529",
   email: "hello@aisers.sa",
   cities: { ar: "الرياض · جدة · الدمام", en: "Riyadh · Jeddah · Dammam" },
 };
