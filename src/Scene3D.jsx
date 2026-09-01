@@ -14,83 +14,8 @@ import * as THREE from "three";
 
 const isSmall = () => typeof window !== "undefined" && window.innerWidth < 768;
 
-/*
-  Two hands reaching toward each other (Creation-of-Adam motif) drawn as
-  minimal line art onto a canvas texture — same thin-stroke language as the
-  site's icons. The right hand mirrors the left; index fingertips stop just
-  short of touching at the center, where the scene's pulsing light sits.
-*/
-function makeHandsTexture() {
-  const c = document.createElement("canvas");
-  c.width = 2048; c.height = 1024;
-  const x = c.getContext("2d");
-  if (!x) return null;
-  x.strokeStyle = "#ffffff";
-  x.lineCap = "round";
-  x.lineJoin = "round";
-  x.shadowColor = "rgba(255,255,255,0.8)";
-  x.shadowBlur = 13;
-
-  const drawHand = () => {
-    x.lineWidth = 12;
-    // forearm top sweeping into the long extended index finger
-    x.beginPath();
-    x.moveTo(140, 430);
-    x.bezierCurveTo(400, 405, 650, 405, 820, 440);
-    x.bezierCurveTo(880, 452, 930, 462, 970, 470);
-    x.stroke();
-    // index underside back to the knuckle
-    x.beginPath();
-    x.moveTo(970, 470);
-    x.bezierCurveTo(925, 484, 875, 490, 830, 492);
-    x.stroke();
-    // three fingers folding under, stacked down from the knuckle
-    x.beginPath();
-    x.moveTo(830, 492);
-    x.bezierCurveTo(890, 500, 910, 522, 878, 538);
-    x.bezierCurveTo(858, 547, 834, 540, 828, 528);
-    x.stroke();
-    x.beginPath();
-    x.moveTo(828, 528);
-    x.bezierCurveTo(872, 545, 880, 568, 850, 580);
-    x.bezierCurveTo(830, 588, 806, 580, 800, 568);
-    x.stroke();
-    x.beginPath();
-    x.moveTo(800, 568);
-    x.bezierCurveTo(834, 585, 834, 606, 808, 613);
-    x.bezierCurveTo(789, 618, 770, 609, 766, 598);
-    x.stroke();
-    // palm heel sweeping back into the forearm bottom
-    x.beginPath();
-    x.moveTo(766, 598);
-    x.bezierCurveTo(650, 620, 480, 622, 360, 600);
-    x.bezierCurveTo(270, 585, 190, 560, 140, 538);
-    x.stroke();
-    // thumb rising across the palm toward the index
-    x.beginPath();
-    x.moveTo(620, 610);
-    x.bezierCurveTo(700, 592, 762, 560, 796, 516);
-    x.stroke();
-  };
-
-  // left hand reaches right…
-  drawHand();
-  // …right hand is its mirror, reaching left; small vertical offset so the
-  // fingertips pass close without overlapping
-  x.save();
-  x.translate(2048, -60);
-  x.scale(-1, 1);
-  drawHand();
-  x.restore();
-
-  const tex = new THREE.CanvasTexture(c);
-  tex.anisotropy = 2;
-  return tex;
-}
-
 function CoreScene({ progress, active, total }) {
   const group = useRef();
-  const hands = useRef();
   const shell = useRef();
   const shell2 = useRef();
   const ring = useRef();
@@ -106,8 +31,6 @@ function CoreScene({ progress, active, total }) {
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
-
-  const handsTex = useMemo(() => makeHandsTexture(), []);
 
   // contained particle field (inside the shell radius)
   const nodes = useMemo(() => {
@@ -152,12 +75,6 @@ function CoreScene({ progress, active, total }) {
       group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, mouse.current.y * 0.1, 0.05);
     }
 
-    if (hands.current) {
-      // billboard: always face the orbiting camera, with a gentle breathing scale
-      hands.current.lookAt(state.camera.position);
-      const hs = 1 + Math.sin(t * 0.5) * 0.02 + p * 0.12;
-      hands.current.scale.setScalar(hs);
-    }
     if (coreLight.current) coreLight.current.intensity = 2.2 + Math.sin(t * 1.5) * 0.5 + p * 1.2;
 
     if (shell.current) {
@@ -185,15 +102,6 @@ function CoreScene({ progress, active, total }) {
       <pointLight ref={coreLight} position={[0, 0, 0]} intensity={2.4} color="#ffffff" distance={10} />
       <pointLight position={[4, 3, 4]} intensity={1.2} color="#cdd3d9" />
       <pointLight position={[-4, -2, -3]} intensity={0.5} color="#7d848c" />
-
-      {/* two hands reaching toward each other — the connection at the heart
-          of the perimeter, fingertips meeting at the pulsing light */}
-      {handsTex && (
-        <mesh ref={hands} position={[0, -0.35, 0]}>
-          <planeGeometry args={[4.6, 2.3]} />
-          <meshBasicMaterial map={handsTex} transparent opacity={0.85} depthWrite={false} />
-        </mesh>
-      )}
 
       {/* contained particle field */}
       <points ref={nodesRef}>
