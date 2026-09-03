@@ -43,20 +43,64 @@ export const SHOWCASE = {
     name: "ULTIMATE STUDIOS",
     tag: { ar: "استوديو التصوير الاحترافي للمنتجات والأعمال", en: "Professional product & business photography studio" },
     stamp: { ar: "علامة من تأسيس وتشغيل أيسرز", en: "A brand founded & operated by AISERS" },
-    cta: { ar: "زيارة الاستوديو", en: "Visit the studio" },
+    cta: { ar: "زيارة الاستوديو", en: "Enter the studio" },
     url: "https://ultima-studios.vercel.app/",
     logo: "/showcase/ultima-logo.png",
   },
-  worksKicker: { ar: "أعمال مختارة", en: "Selected Work" },
+  // Smart services — systems & products we designed and run. Some are live to
+  // visit; the backend platforms carry a system motif instead of a screenshot.
+  servicesKicker: { ar: "أنظمة وخدمات ذكية", en: "Smart Systems & Services" },
+  services: [
+    {
+      name: "ReconCart", ar: "ريكون كارت", icon: "ai", img: "/showcase/reconicas.jpg",
+      url: "https://reconcart.vercel.app",
+      tag: { ar: "ذكاء تسعير", en: "Price intelligence" },
+      desc: {
+        ar: "يراقب أسعار منافسيك في متاجر السعودية على مدار الساعة — تُلصق رابط منتج، فنُنبّهك لحظة يتحرك السعر أو المخزون أو التقييم.",
+        en: "Watches your competitors' Saudi storefronts around the clock — paste a product URL and get pinged the instant price, stock, or rating moves.",
+      },
+    },
+    {
+      name: "ALTA Host", ar: "ألتا للضيافة", icon: "brand", img: "/showcase/alta-host.jpg",
+      url: "https://alta-host-dashboard-ox6i.vercel.app",
+      tag: { ar: "منصة ضيافة", en: "Hospitality platform" },
+      desc: {
+        ar: "منصة ضيافة تدير محادثات النزلاء والعمليات ومركز التحكم التنفيذي عبر واتساب — من الحجز إلى المغادرة في مكان واحد.",
+        en: "A WhatsApp-first hospitality platform that runs guest messaging, operations and an executive control center — check-in to check-out in one place.",
+      },
+    },
+    {
+      name: "Cardflow", ar: "كاردفلو", icon: "platform",
+      tag: { ar: "منصة مبيعات", en: "Sales-ops platform" },
+      desc: {
+        ar: "غرفة قيادة كاملة للمبيعات: نظام CRM وبوابة واتساب ومحرك بريد وتحليلات حيّة، مدمجة فوق مستودع بيانات واحد. كل عميل ورسالة ورقم في شاشة واحدة.",
+        en: "A full sales command room — CRM, WhatsApp gateway, email engine and live analytics fused over one data warehouse. Every lead, message and number on one screen.",
+      },
+    },
+    {
+      name: "Salla Copilot", ar: "مساعد سلة", icon: "next",
+      tag: { ar: "أتمتة التجارة", en: "Commerce automation" },
+      desc: {
+        ar: "عقل أتمتة يتصل بمتاجر سلة: ويبهوكس موقّعة، ومعالجة أحداث موثوقة لا تتكرر، ومحرك ذكاء اصطناعي يكتب أوصاف المنتجات عند الطلب.",
+        en: "An automation brain wired into Salla stores — signed webhooks, an idempotent event pipeline, and an AI engine that writes product listings on command.",
+      },
+    },
+    {
+      name: "WASMZ", ar: "واسمز", icon: "ai",
+      tag: { ar: "محرك رسائل", en: "Messaging engine" },
+      desc: {
+        ar: "محرك بثّ عبر واتساب: بناء الحملات، ومحرك إرسال، وسجل تسليم كامل في لوحة واحدة موصولة بالأتمتة.",
+        en: "A WhatsApp broadcast engine — campaign builder, a sending engine and full delivery history in one dashboard wired to automation.",
+      },
+    },
+  ],
+  worksKicker: { ar: "مواقع نفّذناها", en: "Websites We've Shipped" },
   works: [
+    { name: "BS Creative", ar: "بي إس كرييتف", tag: { ar: "وكالة إبداعية", en: "Creative agency" }, url: "https://bscreatve.com", img: "/showcase/bscreative.jpg" },
     { name: "ALTA Investment", ar: "شركة التا للاستثمار", tag: { ar: "موقع مؤسسي", en: "Corporate site" }, url: "https://alta-site-livid.vercel.app", img: "/showcase/alta-investment.jpg" },
-    { name: "Ahmed Ghanim — Law", ar: "أحمد غانم للمحاماة", tag: { ar: "موقع محاماة", en: "Legal practice" }, url: "https://ahmed-ghanim.vercel.app", img: "/showcase/ahmed-ghanim.jpg" },
     { name: "Nesma Art", ar: "نسمة آرت", tag: { ar: "متجر فني", en: "Art e-commerce" }, url: "https://nesma-art.vercel.app", img: "/showcase/nesma-art.jpg" },
+    { name: "Ahmed Ghanim — Law", ar: "أحمد غانم للمحاماة", tag: { ar: "موقع محاماة", en: "Legal practice" }, url: "https://ahmed-ghanim.vercel.app", img: "/showcase/ahmed-ghanim.jpg" },
     { name: "Al-Hmidani Law", ar: "الحميداني للمحاماة", tag: { ar: "موقع محاماة", en: "Law firm" }, url: "https://alhmidani-law.netlify.app", img: "/showcase/alhmidani.jpg" },
-    { name: "ALTA Host", ar: "ألتا للضيافة", tag: { ar: "منصة ضيافة", en: "Hospitality platform" }, url: "https://alta-host-dashboard-ox6i.vercel.app", img: "/showcase/alta-host.jpg" },
-    { name: "Marsad Executive", ar: "مرصد التنفيذي", tag: { ar: "لوحة قيادة", en: "Executive dashboard" }, url: "https://marsad-executive.netlify.app", img: "/showcase/marsad.jpg" },
-    { name: "AMIRA Cleaning", ar: "أميرة للنظافة", tag: { ar: "موقع خدمات", en: "Services site" }, url: "https://amira-cleaning-sa.netlify.app", img: "/showcase/amira.jpg" },
-    { name: "VITA Control Center", ar: "فيتا — مركز التحكم", tag: { ar: "لوحة أتمتة", en: "Automation console" }, url: "https://vita-automarkou.netlify.app", img: "/showcase/vita.jpg" },
   ],
 };
 

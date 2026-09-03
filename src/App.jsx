@@ -448,19 +448,28 @@ function Showcase({ t, isAr }) {
         scrollTrigger: { trigger: ".sw-head", start: "top 82%" },
       });
       // the featured studio panel rises and its chrome mark drifts up as you reach it
+      // cinematic feature reveal: panel scales up, logo drifts, spotlight breathes
       gsap.from(".sw-feature", {
-        y: 40, opacity: 0, duration: 1, ease: "power3.out",
-        scrollTrigger: { trigger: ".sw-feature", start: "top 84%" },
+        scale: 0.94, opacity: 0, duration: 1.2, ease: "power3.out",
+        scrollTrigger: { trigger: ".sw-feature", start: "top 86%" },
+      });
+      gsap.from(".sw-logo", {
+        opacity: 0, y: 40, scale: 0.9, duration: 1.3, ease: "power2.out",
+        scrollTrigger: { trigger: ".sw-feature", start: "top 82%" },
       });
       gsap.to(".sw-logo", {
-        y: -12, duration: 3.4, ease: "sine.inOut", yoyo: true, repeat: -1,
+        y: -16, duration: 4, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 1.3,
       });
-      // work cards deal in on scroll
-      gsap.utils.toArray(".sw-card").forEach((c, i) => {
+      gsap.from(".sw-feature-copy > *", {
+        y: 24, opacity: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
+        scrollTrigger: { trigger: ".sw-feature", start: "top 74%" },
+      });
+      // cards deal in on scroll
+      gsap.utils.toArray(".sw-svc, .sw-card").forEach((c, i) => {
         gsap.from(c, {
           y: 34, opacity: 0, duration: 0.7, ease: "power3.out",
           scrollTrigger: { trigger: c, start: "top 92%" },
-          delay: (i % 4) * 0.05,
+          delay: (i % 3) * 0.05,
         });
       });
     }, ref);
@@ -476,9 +485,10 @@ function Showcase({ t, isAr }) {
           <p className="lead" data-sw>{t(S.lead)}</p>
         </div>
 
-        {/* featured own-brand studio */}
+        {/* featured own-brand studio — cinematic title card */}
         <a className="sw-feature" href={S.ultima.url} target="_blank" rel="noopener noreferrer">
           <div className="sw-feature-glow" aria-hidden="true" />
+          <div className="sw-feature-stars" aria-hidden="true" />
           <div className="sw-feature-in">
             <div className="sw-logo-wrap">
               <img className="sw-logo" src={S.ultima.logo} alt={S.ultima.name} loading="lazy" />
@@ -492,7 +502,33 @@ function Showcase({ t, isAr }) {
           </div>
         </a>
 
-        {/* selected client work */}
+        {/* smart systems & services */}
+        <div className="sw-works-kick"><Kick>{t(S.servicesKicker)}</Kick></div>
+        <div className="sw-svc-grid">
+          {S.services.map((s) => {
+            const Wrapper = s.url ? "a" : "div";
+            return (
+              <Wrapper className={`sw-svc ${s.url ? "has-link" : ""}`} key={s.name}
+                {...(s.url ? { href: s.url, target: "_blank", rel: "noopener noreferrer" } : {})}>
+                <div className="sw-svc-top">
+                  {s.img
+                    ? <img className="sw-svc-shot" src={s.img} alt={`${s.name} preview`} loading="lazy" />
+                    : <div className="sw-svc-motif"><LineIcon name={s.icon} size={60} /></div>}
+                </div>
+                <div className="sw-svc-body">
+                  <div className="sw-svc-head">
+                    <span className="sw-svc-name">{isAr ? s.ar : s.name}</span>
+                    <span className="sw-svc-tag mono">{t(s.tag)}</span>
+                  </div>
+                  <p className="sw-svc-desc">{t(s.desc)}</p>
+                  {s.url && <span className="sw-svc-live mono">{isAr ? "معاينة مباشرة" : "Live preview"} <span className="ar">↗</span></span>}
+                </div>
+              </Wrapper>
+            );
+          })}
+        </div>
+
+        {/* shipped websites */}
         <div className="sw-works-kick"><Kick>{t(S.worksKicker)}</Kick></div>
         <div className="sw-grid">
           {S.works.map((w) => (
