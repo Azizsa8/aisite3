@@ -28,6 +28,38 @@ export const HERO = {
 
 export const SERVICES_KICKER = { ar: "استعراض الخدمات · ١١ خدمة", en: "Service Catalog · 11 capabilities" };
 
+// ---- Showcase: our own studio brand + selected shipped work (trust builder) ----
+export const SHOWCASE = {
+  kicker: { ar: "من إنتاج أيسرز", en: "Built by AISERS" },
+  heading: {
+    ar: "لا نبني المواقع فحسب — نُطلق علامات ونُشغّلها.",
+    en: "We don't just build sites — we launch brands and run them.",
+  },
+  lead: {
+    ar: "من داخل أيسرز أطلقنا علامتنا الخاصة، ونفّذنا عشرات المشاريع لعملاء حقيقيين. هذه لمحة.",
+    en: "From inside AISERS we launched our own studio brand and shipped dozens of projects for real clients. A glimpse below.",
+  },
+  ultima: {
+    name: "ULTIMATE STUDIOS",
+    tag: { ar: "استوديو التصوير الاحترافي للمنتجات والأعمال", en: "Professional product & business photography studio" },
+    stamp: { ar: "علامة من تأسيس وتشغيل أيسرز", en: "A brand founded & operated by AISERS" },
+    cta: { ar: "زيارة الاستوديو", en: "Visit the studio" },
+    url: "https://ultima-studios.vercel.app/",
+    logo: "/showcase/ultima-logo.png",
+  },
+  worksKicker: { ar: "أعمال مختارة", en: "Selected Work" },
+  works: [
+    { name: "ALTA Investment", ar: "شركة التا للاستثمار", tag: { ar: "موقع مؤسسي", en: "Corporate site" }, url: "https://alta-site-livid.vercel.app", img: "/showcase/alta-investment.jpg" },
+    { name: "Ahmed Ghanim — Law", ar: "أحمد غانم للمحاماة", tag: { ar: "موقع محاماة", en: "Legal practice" }, url: "https://ahmed-ghanim.vercel.app", img: "/showcase/ahmed-ghanim.jpg" },
+    { name: "Nesma Art", ar: "نسمة آرت", tag: { ar: "متجر فني", en: "Art e-commerce" }, url: "https://nesma-art.vercel.app", img: "/showcase/nesma-art.jpg" },
+    { name: "Al-Hmidani Law", ar: "الحميداني للمحاماة", tag: { ar: "موقع محاماة", en: "Law firm" }, url: "https://alhmidani-law.netlify.app", img: "/showcase/alhmidani.jpg" },
+    { name: "ALTA Host", ar: "ألتا للضيافة", tag: { ar: "منصة ضيافة", en: "Hospitality platform" }, url: "https://alta-host-dashboard-ox6i.vercel.app", img: "/showcase/alta-host.jpg" },
+    { name: "Marsad Executive", ar: "مرصد التنفيذي", tag: { ar: "لوحة قيادة", en: "Executive dashboard" }, url: "https://marsad-executive.netlify.app", img: "/showcase/marsad.jpg" },
+    { name: "AMIRA Cleaning", ar: "أميرة للنظافة", tag: { ar: "موقع خدمات", en: "Services site" }, url: "https://amira-cleaning-sa.netlify.app", img: "/showcase/amira.jpg" },
+    { name: "VITA Control Center", ar: "فيتا — مركز التحكم", tag: { ar: "لوحة أتمتة", en: "Automation console" }, url: "https://vita-automarkou.netlify.app", img: "/showcase/vita.jpg" },
+  ],
+};
+
 // ---- Proof strip: real, verifiable claims only — no fabricated numbers. ----
 export const PROOF = {
   kicker: { ar: "لماذا أيسرز", en: "Why AISERS" },

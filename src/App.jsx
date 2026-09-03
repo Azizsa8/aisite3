@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useLayoutEffect, useState, useCallback, lazy, Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BRAND, CONTACT, NAV, PORTFOLIO_NAV, HERO, PROOF, SERVICES_KICKER, SERVICES, SVC_LINKS, PORTFOLIO_PAGE, PORTFOLIO, FORM, SEO, MISC, LEGAL } from "./content.js";
+import { BRAND, CONTACT, NAV, PORTFOLIO_NAV, HERO, PROOF, SHOWCASE, SERVICES_KICKER, SERVICES, SVC_LINKS, PORTFOLIO_PAGE, PORTFOLIO, FORM, SEO, MISC, LEGAL } from "./content.js";
 import Mark, { MARK_PATHS } from "./Mark.jsx";
 import LineIcon from "./Icons.jsx";
 // Lazy-load the 3D scene: three.js is ~800KB and must never block first paint.
@@ -381,6 +381,9 @@ export default function App() {
               <div className="scrollcue"><span>{isAr ? "مرّروا" : "SCROLL"}</span><span className="bar" /></div>
             </section>
 
+            {/* SHOWCASE — our own studio brand + selected shipped client work */}
+            <Showcase t={t} isAr={isAr} />
+
             {/* PROOF STRIP — real, verifiable stats + gateway to the portfolio */}
             <ProofStrip t={t} isAr={isAr} go={go} />
 
@@ -430,6 +433,81 @@ export default function App() {
         <SiteFooter t={t} isAr={isAr} go={go} telHref={telHref} mailHref={mailHref} />
       </main>
     </div>
+  );
+}
+
+function Showcase({ t, isAr }) {
+  const ref = useRef(null);
+  const S = SHOWCASE;
+
+  useEffect(() => {
+    if (prefersReduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".sw-head [data-sw]", {
+        y: 26, opacity: 0, duration: 0.8, stagger: 0.09, ease: "power3.out",
+        scrollTrigger: { trigger: ".sw-head", start: "top 82%" },
+      });
+      // the featured studio panel rises and its chrome mark drifts up as you reach it
+      gsap.from(".sw-feature", {
+        y: 40, opacity: 0, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: ".sw-feature", start: "top 84%" },
+      });
+      gsap.to(".sw-logo", {
+        y: -12, duration: 3.4, ease: "sine.inOut", yoyo: true, repeat: -1,
+      });
+      // work cards deal in on scroll
+      gsap.utils.toArray(".sw-card").forEach((c, i) => {
+        gsap.from(c, {
+          y: 34, opacity: 0, duration: 0.7, ease: "power3.out",
+          scrollTrigger: { trigger: c, start: "top 92%" },
+          delay: (i % 4) * 0.05,
+        });
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, [isAr]);
+
+  return (
+    <section className="showcase" ref={ref}>
+      <div className="wrap">
+        <div className="sw-head">
+          <div data-sw><Kick>{t(S.kicker)}</Kick></div>
+          <h2 data-sw>{t(S.heading)}</h2>
+          <p className="lead" data-sw>{t(S.lead)}</p>
+        </div>
+
+        {/* featured own-brand studio */}
+        <a className="sw-feature" href={S.ultima.url} target="_blank" rel="noopener noreferrer">
+          <div className="sw-feature-glow" aria-hidden="true" />
+          <div className="sw-feature-in">
+            <div className="sw-logo-wrap">
+              <img className="sw-logo" src={S.ultima.logo} alt={S.ultima.name} loading="lazy" />
+            </div>
+            <div className="sw-feature-copy">
+              <span className="sw-stamp mono">{t(S.ultima.stamp)}</span>
+              <div className="sw-brandname">{S.ultima.name}</div>
+              <p className="sw-brandtag">{t(S.ultima.tag)}</p>
+              <span className="sw-visit">{t(S.ultima.cta)} <span className="ar">↗</span></span>
+            </div>
+          </div>
+        </a>
+
+        {/* selected client work */}
+        <div className="sw-works-kick"><Kick>{t(S.worksKicker)}</Kick></div>
+        <div className="sw-grid">
+          {S.works.map((w) => (
+            <a className="sw-card" href={w.url} target="_blank" rel="noopener noreferrer" key={w.name}>
+              <div className="sw-shot"><img src={w.img} alt={`${w.name} — live site`} loading="lazy" /></div>
+              <div className="sw-card-meta">
+                <div className="sw-card-name">{isAr ? w.ar : w.name}</div>
+                <div className="sw-card-tag mono">{t(w.tag)}</div>
+              </div>
+              <span className="sw-card-go" aria-hidden="true"><span className="ar">↗</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
