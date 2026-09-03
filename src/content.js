@@ -30,14 +30,14 @@ export const SERVICES_KICKER = { ar: "استعراض الخدمات · ١١ خد
 
 // ---- Showcase: our own studio brand + selected shipped work (trust builder) ----
 export const SHOWCASE = {
-  kicker: { ar: "من إنتاج أيسرز", en: "Built by AISERS" },
+  kicker: { ar: "أحدث ما أطلقنا", en: "Our Latest Launch" },
   heading: {
-    ar: "لا نبني المواقع فحسب — نُطلق علامات ونُشغّلها.",
-    en: "We don't just build sites — we launch brands and run them.",
+    ar: "علامتنا الأحدث — من التأسيس إلى الإطلاق.",
+    en: "Our newest brand — founded, built and launched.",
   },
   lead: {
-    ar: "من داخل أيسرز أطلقنا علامتنا الخاصة، ونفّذنا عشرات المشاريع لعملاء حقيقيين. هذه لمحة.",
-    en: "From inside AISERS we launched our own studio brand and shipped dozens of projects for real clients. A glimpse below.",
+    ar: "لا نكتفي ببناء المواقع؛ نُطلق علامات كاملة ونُشغّلها. وهذه آخرها.",
+    en: "We don't just build sites — we launch and run whole brands. Here's the latest.",
   },
   ultima: {
     name: "ULTIMATE STUDIOS",
@@ -47,61 +47,11 @@ export const SHOWCASE = {
     url: "https://ultima-studios.vercel.app/",
     logo: "/showcase/ultima-logo.png",
   },
-  // Smart services — systems & products we designed and run. Some are live to
-  // visit; the backend platforms carry a system motif instead of a screenshot.
-  servicesKicker: { ar: "أنظمة وخدمات ذكية", en: "Smart Systems & Services" },
-  services: [
-    {
-      name: "ReconCart", ar: "ريكون كارت", icon: "ai", img: "/showcase/reconicas.jpg",
-      url: "https://reconcart.vercel.app",
-      tag: { ar: "ذكاء تسعير", en: "Price intelligence" },
-      desc: {
-        ar: "يراقب أسعار منافسيك في متاجر السعودية على مدار الساعة — تُلصق رابط منتج، فنُنبّهك لحظة يتحرك السعر أو المخزون أو التقييم.",
-        en: "Watches your competitors' Saudi storefronts around the clock — paste a product URL and get pinged the instant price, stock, or rating moves.",
-      },
-    },
-    {
-      name: "ALTA Host", ar: "ألتا للضيافة", icon: "brand", img: "/showcase/alta-host.jpg",
-      url: "https://alta-host-dashboard-ox6i.vercel.app",
-      tag: { ar: "منصة ضيافة", en: "Hospitality platform" },
-      desc: {
-        ar: "منصة ضيافة تدير محادثات النزلاء والعمليات ومركز التحكم التنفيذي عبر واتساب — من الحجز إلى المغادرة في مكان واحد.",
-        en: "A WhatsApp-first hospitality platform that runs guest messaging, operations and an executive control center — check-in to check-out in one place.",
-      },
-    },
-    {
-      name: "Cardflow", ar: "كاردفلو", icon: "platform",
-      tag: { ar: "منصة مبيعات", en: "Sales-ops platform" },
-      desc: {
-        ar: "غرفة قيادة كاملة للمبيعات: نظام CRM وبوابة واتساب ومحرك بريد وتحليلات حيّة، مدمجة فوق مستودع بيانات واحد. كل عميل ورسالة ورقم في شاشة واحدة.",
-        en: "A full sales command room — CRM, WhatsApp gateway, email engine and live analytics fused over one data warehouse. Every lead, message and number on one screen.",
-      },
-    },
-    {
-      name: "Salla Copilot", ar: "مساعد سلة", icon: "next",
-      tag: { ar: "أتمتة التجارة", en: "Commerce automation" },
-      desc: {
-        ar: "عقل أتمتة يتصل بمتاجر سلة: ويبهوكس موقّعة، ومعالجة أحداث موثوقة لا تتكرر، ومحرك ذكاء اصطناعي يكتب أوصاف المنتجات عند الطلب.",
-        en: "An automation brain wired into Salla stores — signed webhooks, an idempotent event pipeline, and an AI engine that writes product listings on command.",
-      },
-    },
-    {
-      name: "WASMZ", ar: "واسمز", icon: "ai",
-      tag: { ar: "محرك رسائل", en: "Messaging engine" },
-      desc: {
-        ar: "محرك بثّ عبر واتساب: بناء الحملات، ومحرك إرسال، وسجل تسليم كامل في لوحة واحدة موصولة بالأتمتة.",
-        en: "A WhatsApp broadcast engine — campaign builder, a sending engine and full delivery history in one dashboard wired to automation.",
-      },
-    },
-  ],
-  worksKicker: { ar: "مواقع نفّذناها", en: "Websites We've Shipped" },
-  works: [
-    { name: "BS Creative", ar: "بي إس كرييتف", tag: { ar: "وكالة إبداعية", en: "Creative agency" }, url: "https://bscreatve.com", img: "/showcase/bscreative.jpg" },
-    { name: "ALTA Investment", ar: "شركة التا للاستثمار", tag: { ar: "موقع مؤسسي", en: "Corporate site" }, url: "https://alta-site-livid.vercel.app", img: "/showcase/alta-investment.jpg" },
-    { name: "Nesma Art", ar: "نسمة آرت", tag: { ar: "متجر فني", en: "Art e-commerce" }, url: "https://nesma-art.vercel.app", img: "/showcase/nesma-art.jpg" },
-    { name: "Ahmed Ghanim — Law", ar: "أحمد غانم للمحاماة", tag: { ar: "موقع محاماة", en: "Legal practice" }, url: "https://ahmed-ghanim.vercel.app", img: "/showcase/ahmed-ghanim.jpg" },
-    { name: "Al-Hmidani Law", ar: "الحميداني للمحاماة", tag: { ar: "موقع محاماة", en: "Law firm" }, url: "https://alhmidani-law.netlify.app", img: "/showcase/alhmidani.jpg" },
-  ],
+  portalNote: {
+    ar: "وهذه غيضٌ من فيض — عشرات الأنظمة والمواقع والمنتجات بانتظاركم.",
+    en: "And it's only the latest of many — dozens of systems, sites and products await.",
+  },
+  portalCta: { ar: "استعرض كل أعمالنا", en: "Explore all our work" },
 };
 
 // ---- Proof strip: real, verifiable claims only — no fabricated numbers. ----
@@ -273,27 +223,77 @@ export const SERVICES = [
 
 // ---- Portfolio: placeholder entries — swap for the real project list. ----
 export const PORTFOLIO_PAGE = {
-  kicker: { ar: "أعمالنا · ٨ مشاريع", en: "Our Work · 8 projects" },
-  title: { ar: "مشاريع بنيناها لعملائنا", en: "Projects We've Built" },
+  kicker: { ar: "أعمالنا", en: "Portfolio" },
+  title: { ar: "كل ما بنيناه وأطلقناه.", en: "Everything we've built & launched." },
   intro: {
-    ar: "لمحة عن أنظمة ومنصات قمنا بتصميمها وتطويرها. تفاصيل هذه القائمة مؤقتة وسيتم استبدالها بمشاريعنا الفعلية.",
-    en: "A look at systems and platforms we've designed and built. This list is a placeholder and will be replaced with our real project roster.",
+    ar: "علامات ومنتجات وأنظمة ومواقع — نأخذها من الفكرة إلى الإطلاق ونُشغّلها. اضغطوا أيّ عمل حيّ لزيارته مباشرة.",
+    en: "Brands, products, systems and sites — taken from idea to launch, then run. Tap any live project to visit it.",
   },
-  placeholderNote: {
-    ar: "* عناصر نائبة مؤقتة بانتظار قائمة المشاريع الفعلية.",
-    en: "* Placeholder entries, pending the real project list.",
-  },
+  productsKicker: { ar: "علاماتنا ومنتجاتنا", en: "Our Brands & Products" },
+  websitesKicker: { ar: "مواقع نفّذناها", en: "Websites We've Shipped" },
+  live: { ar: "زيارة مباشرة", en: "Visit live" },
 };
 
+// cat: "product" | "website". Live items carry a url + img screenshot; internal
+// systems carry an icon motif (no public URL to link).
 export const PORTFOLIO = [
-  { n: "01", tag: { ar: "منصة سحابية", en: "Cloud Platform" }, title: { ar: "منصة إدارة عمليات", en: "Ops Management Platform" }, blurb: { ar: "منصة داخلية لتنسيق الفرق والمهام في الوقت الفعلي.", en: "An internal platform coordinating teams and tasks in real time." } },
-  { n: "02", tag: { ar: "أتمتة", en: "Automation" }, title: { ar: "نظام أتمتة مخزون", en: "Inventory Automation System" }, blurb: { ar: "أتمتة كاملة لمزامنة المخزون بين عدة فروع.", en: "End-to-end automation syncing stock across multiple branches." } },
-  { n: "03", tag: { ar: "تجارة إلكترونية", en: "E-Commerce" }, title: { ar: "متجر إلكتروني مخصص", en: "Bespoke Online Store" }, blurb: { ar: "متجر مبني من الصفر بتجربة دفع سريعة.", en: "A ground-up storefront with a fast, custom checkout flow." } },
-  { n: "04", tag: { ar: "واتساب", en: "WhatsApp" }, title: { ar: "بنية واتساب للأعمال", en: "WhatsApp Business Infrastructure" }, blurb: { ar: "ربط كامل لواتساب بأنظمة الطلبات والدعم.", en: "Full WhatsApp integration with ordering and support systems." } },
-  { n: "05", tag: { ar: "لوحة تحكم", en: "Dashboard" }, title: { ar: "لوحة تحكم تنفيذية", en: "Executive BI Dashboard" }, blurb: { ar: "رؤية لحظية لمؤشرات الأداء الرئيسية.", en: "Live visibility into key operational metrics." } },
-  { n: "06", tag: { ar: "تطبيق بهوية العميل", en: "Branded App" }, title: { ar: "تطبيق جوال بهوية كاملة", en: "Fully Branded Mobile App" }, blurb: { ar: "تطبيق جوال أُطلق بهوية العميل الكاملة خلال أسابيع.", en: "A mobile app launched under the client's full identity in weeks." } },
-  { n: "07", tag: { ar: "ذكاء اصطناعي", en: "AI Platform" }, title: { ar: "مساعد ذكاء اصطناعي داخلي", en: "Internal AI Assistant" }, blurb: { ar: "مساعد ذكاء اصطناعي محلي للبحث في مستندات الشركة.", en: "An on-premise AI assistant for internal document search." } },
-  { n: "08", tag: { ar: "استشارات", en: "Consulting" }, title: { ar: "خارطة تحول رقمي", en: "Digital Transformation Roadmap" }, blurb: { ar: "خارطة طريق تقنية لمدة خمس سنوات لمؤسسة متوسطة.", en: "A five-year technology roadmap for a mid-size enterprise." } },
+  // ── brands & products ──
+  { cat: "product", name: "Ultimate Studios", ar: "ألتيمت ستوديوز", icon: "brand", img: "/showcase/ultima.jpg", url: "https://ultima-studios.vercel.app/",
+    tag: { ar: "علامتنا الأحدث", en: "Our newest brand" },
+    blurb: { ar: "استوديو تصوير احترافي أسّسناه وأطلقناه وشغّلناه بالكامل — من الهوية إلى الموقع إلى العمليات.", en: "A professional photography studio we founded, launched and fully run — identity, site and operations." } },
+  { cat: "product", name: "ReconCart", ar: "ريكون كارت", icon: "ai", img: "/showcase/reconicas.jpg", url: "https://reconcart.vercel.app",
+    tag: { ar: "ذكاء تسعير", en: "Price intelligence" },
+    blurb: { ar: "يراقب أسعار منافسيك في متاجر السعودية على مدار الساعة وينبّهك لحظة يتحرك السعر أو المخزون.", en: "Watches your competitors' Saudi storefronts 24/7 and pings you the instant price or stock moves." } },
+  { cat: "product", name: "Cardflow", ar: "كاردفلو", icon: "platform",
+    tag: { ar: "منصة مبيعات", en: "Sales-ops platform" },
+    blurb: { ar: "غرفة قيادة للمبيعات: CRM وبوابة واتساب ومحرك بريد وتحليلات حيّة فوق مستودع بيانات واحد.", en: "A sales command room — CRM, WhatsApp gateway, email engine and live analytics over one warehouse." } },
+  { cat: "product", name: "Smart Sawaed", ar: "السواعد الذكية", icon: "platform",
+    tag: { ar: "سوق خدمات", en: "Services marketplace" },
+    blurb: { ar: "سوق حجز خدمات سعودي متكامل — تطبيقات عميل ومزوّد، وربط واتساب، ولوحة تحكم مركزية.", en: "A full Saudi service-booking marketplace — customer & provider apps, WhatsApp and a central console." } },
+  { cat: "product", name: "Jana Archive", ar: "أرشيف جنى", icon: "ai",
+    tag: { ar: "أرشيف ذكي", en: "AI knowledge base" },
+    blurb: { ar: "بنية أرشفة عربية بالذكاء الاصطناعي — بحث دلالي، أتمتة، وبوت واتساب فوق قاعدة متجهات.", en: "Arabic AI knowledge infrastructure — semantic search, automation and a WhatsApp bot over a vector DB." } },
+  { cat: "product", name: "Agent Registry", ar: "سجل الوكلاء", icon: "sovereign",
+    tag: { ar: "بنية أنظمة", en: "Systems infrastructure" },
+    blurb: { ar: "سجلّ موحّد لمنصة وكلاء واتساب الذكيين يربط كل وكيل بمشروعه وصلاحياته — من أنظف ما بنينا.", en: "A single registry for a WhatsApp AI-agent platform mapping each agent to its project and permissions." } },
+  { cat: "product", name: "Salla Copilot", ar: "مساعد سلة", icon: "next",
+    tag: { ar: "أتمتة تجارة", en: "Commerce automation" },
+    blurb: { ar: "عقل أتمتة يتصل بمتاجر سلة: ويبهوكس موقّعة ومحرك ذكاء اصطناعي يكتب أوصاف المنتجات عند الطلب.", en: "An automation brain wired into Salla — signed webhooks and an AI engine that writes listings on command." } },
+  { cat: "product", name: "model-lab", ar: "مختبر النماذج", icon: "ai",
+    tag: { ar: "أداة ذكاء اصطناعي", en: "AI infra tool" },
+    blurb: { ar: "أداة تنشر أي نموذج ذكاء اصطناعي على معالج سحابي كنقطة نهاية متوافقة، مع محادثة طرفية جاهزة.", en: "A tool that deploys any AI model to a cloud GPU as a compatible endpoint, with a ready terminal chat." } },
+  { cat: "product", name: "WASMZ", ar: "واسمز", icon: "ai",
+    tag: { ar: "محرك رسائل", en: "Messaging engine" },
+    blurb: { ar: "محرك بثّ عبر واتساب: بناء الحملات، ومحرك الإرسال، وسجل التسليم في لوحة واحدة موصولة بالأتمتة.", en: "A WhatsApp broadcast engine — campaign builder, sending engine and delivery history in one dashboard." } },
+
+  // ── client websites ──
+  { cat: "website", name: "BS Creative", ar: "بي إس كرييتف", img: "/showcase/bscreative.jpg", url: "https://bscreatve.com",
+    tag: { ar: "وكالة إبداعية", en: "Creative agency" },
+    blurb: { ar: "موقع سينمائي لوكالة إنتاج بصري سعودية، بحركة وهوية جريئة.", en: "A cinematic site for a Saudi visual-production agency, with bold motion and identity." } },
+  { cat: "website", name: "ALTA Investment", ar: "شركة التا للاستثمار", img: "/showcase/alta-investment.jpg", url: "https://alta-site-livid.vercel.app",
+    tag: { ar: "موقع مؤسسي", en: "Corporate site" },
+    blurb: { ar: "موقع مؤسسي عربي لشركة استثمار في الرياض، بخلفية تحليلات وربط واتساب.", en: "An Arabic corporate site for a Riyadh investment company, with an analytics backend and WhatsApp." } },
+  { cat: "website", name: "ALTA Host", ar: "ألتا للضيافة", img: "/showcase/alta-host.jpg", url: "https://alta-host-dashboard-ox6i.vercel.app",
+    tag: { ar: "منصة ضيافة", en: "Hospitality platform" },
+    blurb: { ar: "منصة ضيافة تدير محادثات النزلاء والعمليات ومركز تحكم تنفيذي عبر واتساب.", en: "A WhatsApp-first hospitality platform for guest messaging, operations and an executive console." } },
+  { cat: "website", name: "Ahmed Ghanim — Law", ar: "أحمد غانم للمحاماة", img: "/showcase/ahmed-ghanim.jpg", url: "https://ahmed-ghanim.vercel.app",
+    tag: { ar: "محاماة", en: "Legal practice" },
+    blurb: { ar: "موقع فاخر داكن لمحامٍ ومستشار قانوني، بأسلوب سردي متحرك ودعوة واتساب.", en: "A dark-luxe site for a lawyer and legal consultant, with a scroll manifesto and WhatsApp CTA." } },
+  { cat: "website", name: "Nesma Art", ar: "نسمة آرت", img: "/showcase/nesma-art.jpg", url: "https://nesma-art.vercel.app",
+    tag: { ar: "متجر فني", en: "Art e-commerce" },
+    blurb: { ar: "متجر ملصقات فنية بالطلب بأسلوب معرض تحريري راقٍ.", en: "A print-on-demand art-poster store with a refined editorial-gallery aesthetic." } },
+  { cat: "website", name: "Al-Hmidani Law", ar: "الحميداني للمحاماة", img: "/showcase/alhmidani.jpg", url: "https://alhmidani-law.netlify.app",
+    tag: { ar: "محاماة", en: "Law firm" },
+    blurb: { ar: "موقع عربي لمكتب محاماة بمشهد ثلاثي الأبعاد خفيف.", en: "An Arabic law-firm site with a light three-dimensional scene." } },
+  { cat: "website", name: "AMIRA Cleaning", ar: "أميرة للنظافة", img: "/showcase/amira.jpg", url: "https://amira-cleaning-sa.netlify.app",
+    tag: { ar: "موقع خدمات", en: "Services site" },
+    blurb: { ar: "موقع تسويقي نظيف لشركة نظافة سعودية للمنازل والأعمال.", en: "A clean marketing site for a Saudi home & business cleaning company." } },
+  { cat: "website", name: "Marsad Executive", ar: "مرصد التنفيذي", img: "/showcase/marsad.jpg", url: "https://marsad-executive.netlify.app",
+    tag: { ar: "لوحة قيادة", en: "Executive dashboard" },
+    blurb: { ar: "لوحة قيادة تنفيذية لمتابعة المؤشرات في مكان واحد.", en: "An executive dashboard bringing key metrics into one view." } },
+  { cat: "website", name: "VITA Control Center", ar: "فيتا — مركز التحكم", img: "/showcase/vita.jpg", url: "https://vita-automarkou.netlify.app",
+    tag: { ar: "لوحة أتمتة", en: "Automation console" },
+    blurb: { ar: "مركز تحكم لأتمتة التسويق بلوحات ورسوم بيانية حيّة.", en: "A marketing-automation control center with live dashboards and charts." } },
 ];
 
 export const SVC_LINKS = {

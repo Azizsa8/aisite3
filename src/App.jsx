@@ -82,6 +82,16 @@ export default function App() {
     try { return localStorage.getItem("aisers_lang") || "ar"; } catch { return "ar"; }
   });
   const [menu, setMenu] = useState(false);
+  // touch/phone widths have no cursor to drive the dither reveal, so the hero
+  // shows a clean glowing mark there instead of the halftone canvas
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(max-width: 767px)").matches : false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const on = (e) => setIsMobile(e.matches);
+    mq.addEventListener ? mq.addEventListener("change", on) : mq.addListener(on);
+    return () => { mq.removeEventListener ? mq.removeEventListener("change", on) : mq.removeListener(on); };
+  }, []);
   const [route, setRoute] = useState(() => routeFromPath(window.location.pathname));
   const [selected, setSelected] = useState([]);
   const [flashIdx, setFlashIdx] = useState(null);
@@ -354,17 +364,18 @@ export default function App() {
 
             {/* HERO */}
             <section id="hero">
-              {prefersReduced() && <div className="hero-stars" aria-hidden="true" />}
-              {/* full-bleed dithered mark: Bayer-halftone AISERS mark rippling
-                  behind the type; the crisp glowing mark surfaces under the cursor */}
-              {!prefersReduced() && (
+              {(prefersReduced() || isMobile) && <div className="hero-stars" aria-hidden="true" />}
+              {/* Desktop: full-bleed Bayer-halftone mark that the cursor reveals.
+                  Phones have no cursor to drive it, so they get the clean glowing
+                  mark instead — legible and premium without the coarse dots. */}
+              {!prefersReduced() && !isMobile && (
                 <div className="hero-fx" aria-hidden="true">
                   <DitherReveal image="/mark-hero.svg" fit="cover" ditherStyle="bayer8"
                     dotSize={4} revealRadius={170} revealSoftness={60} wave waveSpeed={38} waveDensity={18} />
                 </div>
               )}
               <div className="wrap">
-                {prefersReduced() && <div className="hero-mark"><Mark size={44} stroke={7} glow={0.9} /></div>}
+                {(prefersReduced() || isMobile) && <div className="hero-mark"><Mark size={54} stroke={7} glow={0.95} /></div>}
                 <div className="wordmark" dir="ltr">
                   <span className="rule" />
                   <h1 aria-label={`AISERS SYSTEMS — ${t(HERO.tagline)}`}>
@@ -381,8 +392,8 @@ export default function App() {
               <div className="scrollcue"><span>{isAr ? "مرّروا" : "SCROLL"}</span><span className="bar" /></div>
             </section>
 
-            {/* SHOWCASE — our own studio brand + selected shipped client work */}
-            <Showcase t={t} isAr={isAr} />
+            {/* SHOWCASE — our newest launch (Ultima), teasing the full portfolio */}
+            <Showcase t={t} isAr={isAr} go={go} />
 
             {/* PROOF STRIP — real, verifiable stats + gateway to the portfolio */}
             <ProofStrip t={t} isAr={isAr} go={go} />
@@ -436,7 +447,7 @@ export default function App() {
   );
 }
 
-function Showcase({ t, isAr }) {
+function Showcase({ t, isAr, go }) {
   const ref = useRef(null);
   const S = SHOWCASE;
 
@@ -447,7 +458,6 @@ function Showcase({ t, isAr }) {
         y: 26, opacity: 0, duration: 0.8, stagger: 0.09, ease: "power3.out",
         scrollTrigger: { trigger: ".sw-head", start: "top 82%" },
       });
-      // the featured studio panel rises and its chrome mark drifts up as you reach it
       // cinematic feature reveal: panel scales up, logo drifts, spotlight breathes
       gsap.from(".sw-feature", {
         scale: 0.94, opacity: 0, duration: 1.2, ease: "power3.out",
@@ -464,13 +474,9 @@ function Showcase({ t, isAr }) {
         y: 24, opacity: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
         scrollTrigger: { trigger: ".sw-feature", start: "top 74%" },
       });
-      // cards deal in on scroll
-      gsap.utils.toArray(".sw-svc, .sw-card").forEach((c, i) => {
-        gsap.from(c, {
-          y: 34, opacity: 0, duration: 0.7, ease: "power3.out",
-          scrollTrigger: { trigger: c, start: "top 92%" },
-          delay: (i % 3) * 0.05,
-        });
+      gsap.from(".sw-portal", {
+        y: 24, opacity: 0, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ".sw-portal", start: "top 92%" },
       });
     }, ref);
     return () => ctx.revert();
@@ -485,7 +491,7 @@ function Showcase({ t, isAr }) {
           <p className="lead" data-sw>{t(S.lead)}</p>
         </div>
 
-        {/* featured own-brand studio — cinematic title card */}
+        {/* our newest launch — cinematic title card */}
         <a className="sw-feature" href={S.ultima.url} target="_blank" rel="noopener noreferrer">
           <div className="sw-feature-glow" aria-hidden="true" />
           <div className="sw-feature-stars" aria-hidden="true" />
@@ -502,45 +508,12 @@ function Showcase({ t, isAr }) {
           </div>
         </a>
 
-        {/* smart systems & services */}
-        <div className="sw-works-kick"><Kick>{t(S.servicesKicker)}</Kick></div>
-        <div className="sw-svc-grid">
-          {S.services.map((s) => {
-            const Wrapper = s.url ? "a" : "div";
-            return (
-              <Wrapper className={`sw-svc ${s.url ? "has-link" : ""}`} key={s.name}
-                {...(s.url ? { href: s.url, target: "_blank", rel: "noopener noreferrer" } : {})}>
-                <div className="sw-svc-top">
-                  {s.img
-                    ? <img className="sw-svc-shot" src={s.img} alt={`${s.name} preview`} loading="lazy" />
-                    : <div className="sw-svc-motif"><LineIcon name={s.icon} size={60} /></div>}
-                </div>
-                <div className="sw-svc-body">
-                  <div className="sw-svc-head">
-                    <span className="sw-svc-name">{isAr ? s.ar : s.name}</span>
-                    <span className="sw-svc-tag mono">{t(s.tag)}</span>
-                  </div>
-                  <p className="sw-svc-desc">{t(s.desc)}</p>
-                  {s.url && <span className="sw-svc-live mono">{isAr ? "معاينة مباشرة" : "Live preview"} <span className="ar">↗</span></span>}
-                </div>
-              </Wrapper>
-            );
-          })}
-        </div>
-
-        {/* shipped websites */}
-        <div className="sw-works-kick"><Kick>{t(S.worksKicker)}</Kick></div>
-        <div className="sw-grid">
-          {S.works.map((w) => (
-            <a className="sw-card" href={w.url} target="_blank" rel="noopener noreferrer" key={w.name}>
-              <div className="sw-shot"><img src={w.img} alt={`${w.name} — live site`} loading="lazy" /></div>
-              <div className="sw-card-meta">
-                <div className="sw-card-name">{isAr ? w.ar : w.name}</div>
-                <div className="sw-card-tag mono">{t(w.tag)}</div>
-              </div>
-              <span className="sw-card-go" aria-hidden="true"><span className="ar">↗</span></span>
-            </a>
-          ))}
+        {/* gateway into the full portfolio */}
+        <div className="sw-portal">
+          <span className="sw-portal-note">{t(S.portalNote)}</span>
+          <button className="btn solid sw-portal-btn" onClick={() => go("portfolio")}>
+            {t(S.portalCta)} <span className="ar">→</span>
+          </button>
         </div>
       </div>
     </section>
@@ -592,42 +565,70 @@ function ProofStrip({ t, isAr, go }) {
   );
 }
 
+function PortfolioCard({ p, isAr, t, live }) {
+  const Wrapper = p.url ? "a" : "div";
+  const num = String(p.i + 1).padStart(2, "0");
+  return (
+    <Wrapper className={`pf-card ${p.url ? "has-link" : ""}`}
+      {...(p.url ? { href: p.url, target: "_blank", rel: "noopener noreferrer" } : {})}>
+      <div className="pf-thumb">
+        {p.img
+          ? <img className="pf-shot" src={p.img} alt={`${p.name} preview`} loading="lazy" />
+          : <div className="pf-motif"><LineIcon name={p.icon || "platform"} size={64} /></div>}
+        <span className="pf-num mono">{num}</span>
+      </div>
+      <div className="pf-body">
+        <div className="pf-row">
+          <h3>{isAr ? p.ar : p.name}</h3>
+          <span className="pf-tag mono">{t(p.tag)}</span>
+        </div>
+        <p>{t(p.blurb)}</p>
+        {p.url && <span className="pf-live mono">{t(live)} <span className="ar">↗</span></span>}
+      </div>
+    </Wrapper>
+  );
+}
+
 function PortfolioPage({ t, isAr, go }) {
   useEffect(() => {
     if (prefersReduced()) return;
     const ctx = gsap.context(() => {
-      gsap.from(".subpage .kick, .subpage h1, .subpage .lead", { y: 20, opacity: 0, duration: 0.7, stagger: 0.08, ease: "power3.out" });
-      gsap.utils.toArray(".pf-card").forEach((card) => {
-        gsap.from(card, { y: 40, opacity: 0, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: card, start: "top 90%" } });
+      gsap.from(".pf-hero [data-r]", { y: 26, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" });
+      gsap.utils.toArray(".pf-groupkick").forEach((k) => {
+        gsap.from(k, { y: 20, opacity: 0, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: k, start: "top 90%" } });
+      });
+      gsap.utils.toArray(".pf-card").forEach((card, i) => {
+        gsap.from(card, { y: 40, opacity: 0, duration: 0.7, ease: "power3.out",
+          scrollTrigger: { trigger: card, start: "top 92%" }, delay: (i % 3) * 0.05 });
       });
     });
     return () => ctx.revert();
-  }, []);
+  }, [isAr]);
+
+  const products = PORTFOLIO.map((p, i) => ({ ...p, i })).filter((p) => p.cat === "product");
+  const websites = PORTFOLIO.map((p, i) => ({ ...p, i })).filter((p) => p.cat === "website");
 
   return (
-    <section className="subpage">
+    <section className="subpage pf-page">
       <div className="wrap">
         <a className="back" onClick={() => go("home")} style={{ cursor: "pointer" }}>
           <span className="ar">←</span> {isAr ? "الرئيسية" : "Home"}
         </a>
-        <div className="glyph"><LineIcon name="brand" size={72} /></div>
-        <Kick>{t(PORTFOLIO_PAGE.kicker)}</Kick>
-        <h1 className="svc-title">{t(PORTFOLIO_PAGE.title)}</h1>
-        <p className="lead">{t(PORTFOLIO_PAGE.intro)}</p>
-
-        <div className="pf-grid">
-          {PORTFOLIO.map((p) => (
-            <article className="pf-card" key={p.n}>
-              <div className="pf-thumb" aria-hidden="true"><span className="pf-n mono">{p.n}</span></div>
-              <div className="pf-body">
-                <span className="pf-tag mono">{t(p.tag)}</span>
-                <h3>{t(p.title)}</h3>
-                <p>{t(p.blurb)}</p>
-              </div>
-            </article>
-          ))}
+        <div className="pf-hero">
+          <div data-r><Kick>{t(PORTFOLIO_PAGE.kicker)}</Kick></div>
+          <h1 className="svc-title" data-r>{t(PORTFOLIO_PAGE.title)}</h1>
+          <p className="lead" data-r>{t(PORTFOLIO_PAGE.intro)}</p>
         </div>
-        <p className="pf-note mono">{t(PORTFOLIO_PAGE.placeholderNote)}</p>
+
+        <div className="pf-groupkick"><Kick>{t(PORTFOLIO_PAGE.productsKicker)}</Kick></div>
+        <div className="pf-grid">
+          {products.map((p) => <PortfolioCard key={p.name} p={p} isAr={isAr} t={t} live={PORTFOLIO_PAGE.live} />)}
+        </div>
+
+        <div className="pf-groupkick"><Kick>{t(PORTFOLIO_PAGE.websitesKicker)}</Kick></div>
+        <div className="pf-grid">
+          {websites.map((p) => <PortfolioCard key={p.name} p={p} isAr={isAr} t={t} live={PORTFOLIO_PAGE.live} />)}
+        </div>
       </div>
     </section>
   );
